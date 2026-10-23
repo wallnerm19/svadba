@@ -216,8 +216,8 @@ export const wedding: WeddingConfig = {
     title: 'Prídete?',
     intro:
       'Budeme nesmierne radi, ak tento deň strávite s nami. Prosíme, dajte nám vedieť, či prídete – pomôže nám to so všetkými prípravami.',
-    // ⚠️ Nahraďte odkazom na váš Google formulár (pozri README → „Nastavenie RSVP“).
-    formUrl: 'https://docs.google.com/forms/d/e/VLOZTE-ID-FORMULARA/viewform',
+    // Google formulár na potvrdenie účasti (odpovede sa ukladajú do Google Tabuľky).
+    formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScVc9ZBYkGXMXj3pX1dQ09oZ2BY42nKmm2yQ62akptzHJ2oCw/viewform',
     deadline: '2027-03-31',
     instructions: [
       'Vyplňte krátky formulár – zaberie to menej ako dve minúty.',

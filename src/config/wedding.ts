@@ -57,6 +57,13 @@ export const wedding: WeddingConfig = {
     { id: 'rsvp', label: 'RSVP' },
   ],
 
+  envelope: {
+    enabled: true,
+    eyebrow: 'Svadobné oznámenie',
+    openLabel: 'Otvorte pozvánku',
+    cardText: 'Srdečne vás pozývame',
+  },
+
   hero: {
     eyebrow: 'Berieme sa!',
     headline: 'Pozývame vás na našu svadbu',

@@ -118,6 +118,24 @@ Fotky zmenšíte zadarmo napr. cez [Squoosh](https://squoosh.app/). Galéria sa 
 
 Všetko sú bežné texty v `wedding.ts`: `story`, `info.accommodation`, `info.cards`, `info.dressCode`, `info.faq`, `info.contacts`, `gifts`, `closing`.
 
+### Úvodná obálka
+
+Pri každom otvorení stránky sa najprv zobrazí zapečatená obálka s voskovou pečaťou (monogram z prvých písmen mien). Po kliknutí na **Otvorte pozvánku** sa pečať rozlomí, obálka otvorí, vysunie sa pozvánka a stránka sa plynulo zobrazí.
+
+```ts
+envelope: {
+  enabled: true,                       // false = stránka sa otvorí rovno, bez obálky
+  eyebrow: 'Svadobné oznámenie',
+  openLabel: 'Otvorte pozvánku',
+  cardText: 'Srdečne vás pozývame',    // text na pozvánke vo vnútri obálky
+},
+```
+
+- Odkaz priamo na sekciu (napr. `…/svadba/#rsvp`) obálku preskočí.
+- Hosť môže obálku preskočiť tlačidlom **Preskočiť** vpravo hore.
+- Pri systémovom nastavení „obmedziť pohyb“ sa namiesto animácie použije jemné prelínanie.
+- Vzhľad obálky je v [`src/components/Envelope.tsx`](src/components/Envelope.tsx).
+
 ### Skrytie voliteľných sekcií
 
 ```ts

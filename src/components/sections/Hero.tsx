@@ -5,20 +5,23 @@ import { asset } from '../../lib/links';
 import { firstName, isSectionVisible, longDate, secondName, weekday } from '../../lib/wedding';
 import { Countdown } from '../Countdown';
 import { ButtonLink } from '../ui/Button';
+import { useIntroReady } from '../../hooks/useIntro';
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const nextSection = isSectionVisible('nas-pribeh') ? 'nas-pribeh' : 'svadba';
 
 function AnimatedName({ text, delay }: { text: string; delay: number }) {
   const reduce = useReducedMotion();
+  const ready = useIntroReady();
+  const hidden = { opacity: 0, y: reduce ? 0 : '0.35em' };
   return (
     <span className="inline-block" aria-hidden="true">
       {text.split('').map((char, i) => (
         <motion.span
           key={i}
           className="inline-block"
-          initial={{ opacity: 0, y: reduce ? 0 : '0.35em' }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={hidden}
+          animate={ready ? { opacity: 1, y: 0 } : hidden}
           transition={{ duration: 1.1, delay: delay + i * 0.045, ease }}
         >
           {char}
@@ -31,16 +34,21 @@ function AnimatedName({ text, delay }: { text: string; delay: number }) {
 export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
+  // Kým je zobrazená obálka, animácie úvodu čakajú.
+  const ready = useIntroReady();
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const imageY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '18%']);
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '12%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, reduce ? 1 : 0]);
   const { separator } = wedding.couple;
-  const fade = (delay: number) => ({
-    initial: { opacity: 0, y: reduce ? 0 : 16 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 1.2, delay, ease },
-  });
+  const fade = (delay: number) => {
+    const hidden = { opacity: 0, y: reduce ? 0 : 16 };
+    return {
+      initial: hidden,
+      animate: ready ? { opacity: 1, y: 0 } : hidden,
+      transition: { duration: 1.2, delay, ease },
+    };
+  };
 
   return (
     <section
@@ -60,7 +68,7 @@ export function Hero() {
           className="h-full w-full object-cover"
           style={{ objectPosition: wedding.hero.image.focus }}
           initial={{ scale: reduce ? 1 : 1.08 }}
-          animate={{ scale: 1 }}
+          animate={{ scale: ready || reduce ? 1 : 1.08 }}
           transition={{ duration: 2.6, ease }}
         />
       </motion.div>
@@ -90,7 +98,7 @@ export function Hero() {
               aria-hidden="true"
               className="my-1 font-serif text-[0.7em] text-champagne italic lg:my-0 lg:text-[0.7em]"
               initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              animate={ready ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
               transition={{ duration: 1.4, delay: 0.75, ease }}
             >
               {separator}
@@ -127,7 +135,7 @@ export function Hero() {
         href={`#${nextSection}`}
         className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[0.6rem] uppercase tracking-[0.3em] text-ivory/75 transition-colors hover:text-ivory"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: ready ? 1 : 0 }}
         transition={{ delay: 2.4, duration: 1 }}
       >
         <span>Posuňte nižšie</span>

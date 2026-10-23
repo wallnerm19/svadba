@@ -169,6 +169,17 @@ export interface WeddingConfig {
   /** Položky navigácie v poradí, v akom sa zobrazia. Skryté sekcie sa vynechajú automaticky. */
   navigation: { id: SectionId; label: string }[];
 
+  /** Úvodná animácia – stránka sa najprv ukáže ako zapečatená obálka. */
+  envelope: {
+    enabled: boolean;
+    /** Malý nadpis nad obálkou. */
+    eyebrow: string;
+    /** Text tlačidla na otvorenie. */
+    openLabel: string;
+    /** Text na pozvánke, ktorá sa vysunie z obálky. */
+    cardText: string;
+  };
+
   hero: {
     eyebrow: string;
     headline: string;

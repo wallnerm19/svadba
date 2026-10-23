@@ -5,7 +5,7 @@ import { isSectionVisible, coupleNames, longDate } from '../../lib/wedding';
 export function Footer() {
   const items = wedding.navigation.filter((item) => isSectionVisible(item.id));
   return (
-    <footer className="bg-[#3b4634] py-14 text-ivory/70">
+    <footer className="bg-[#3f4b38] py-14 text-ivory/70">
       <div className="container-page flex flex-col items-center gap-8 text-center">
         <p className="font-serif text-3xl text-ivory">{coupleNames}</p>
         <nav aria-label="Navigácia v pätičke">

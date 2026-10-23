@@ -136,21 +136,21 @@ Skryté sekcie sa automaticky odstránia aj z navigácie. Poradie a názvy polo�
 
 ### Farby a písma
 
-Stránka používa **tmavú šalviovú zelenú** so svetlým textom a šampanskými akcentmi (rovnako ako sekcia RSVP). Farby sú v [`src/index.css`](src/index.css):
+Stránka používa **jemné šalviové odtiene** – svetlé zelenkasté pozadie, tmavozelený text a zelené akcenty; tmavú zelenú má len sekcia RSVP. Farby sú v [`src/index.css`](src/index.css):
 
 - trieda **`.theme-sage`** – farby obsahových sekcií (Príbeh, Svadba, Harmonogram, Galéria, Informácie, Dary), navigácie a mobilného menu:
 
   ```css
-  --color-ivory: #56654c;      /* plocha sekcií a kariet */
-  --color-cream: #4c5a43;      /* tmavší odtieň pre striedanie sekcií */
-  --color-ink: #fbf8f2;        /* hlavný (svetlý) text */
-  --color-ink-soft: #e0e3d8;   /* vedľajší text */
-  --color-gold-deep: #ecdfc9;  /* šampanské nadpisy a akcenty */
+  --color-ivory: #f1f3ec;      /* pozadie sekcií a kariet */
+  --color-cream: #e7ebe0;      /* o odtieň tmavšie pozadie pre striedanie sekcií */
+  --color-ink: #2c3527;        /* hlavný text */
+  --color-ink-soft: #4f5b48;   /* vedľajší text */
+  --color-gold-deep: #56654c;  /* malé nadpisy a akcenty */
   ```
 
-- blok **`@theme`** – základné farby (sekcia RSVP `--color-sage-dark`, text na fotografiách, galéria).
+- blok **`@theme`** – základné farby (tmavá zelená sekcie RSVP `--color-sage-dark`, text na fotografiách, galéria).
 
-Ak by ste sa chceli vrátiť k svetlej (slonovinovej) verzii, stačí odstrániť triedu `theme-sage` z jednotlivých sekcií.
+Ak by ste sa chceli vrátiť k pôvodnej slonovinovo-zlatej verzii, stačí odstrániť triedu `theme-sage` z jednotlivých sekcií.
 
 Písma sú uložené priamo v projekte (bez Google Fonts – rýchlejšie a bez sledovania hostí):
 

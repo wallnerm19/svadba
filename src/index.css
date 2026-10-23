@@ -47,7 +47,7 @@
   }
 
   body {
-    @apply bg-sage-dark font-sans text-ink antialiased;
+    @apply bg-[#f1f3ec] font-sans text-ink antialiased;
     font-weight: 400;
     line-height: 1.7;
     text-rendering: optimizeLegibility;
@@ -102,23 +102,24 @@
   }
 
   /*
-   * Tmavá šalviová téma (rovnaké farby ako sekcia RSVP).
+   * Jemná šalviová téma – svetlé zelenkasté pozadie, tmavozelený text
+   * a zelené akcenty (tmavú zelenú má len sekcia RSVP).
    * Prehodí farebné premenné vo vnútri prvku: „ivory/cream“ sú plochy,
-   * „ink“ je svetlý text, „gold“ sú šampanské akcenty.
-   * Úprava odtieňov zelenej: zmeňte hodnoty nižšie.
+   * „ink“ je text, „gold-deep“ sú malé nadpisy a akcenty.
+   * Úprava odtieňov: zmeňte hodnoty nižšie.
    */
   .theme-sage {
-    --color-ivory: #56654c;
-    --color-cream: #4c5a43;
-    --color-champagne: #6e7e63;
-    --color-sage-light: rgb(251 248 242 / 0.1);
-    --color-sage-dark: #ecdfc9;
-    --color-gold: #d6c29c;
-    --color-gold-deep: #ecdfc9;
-    --color-ink: #fbf8f2;
-    --color-ink-soft: #e0e3d8;
-    --color-line: rgb(251 248 242 / 0.2);
-    --shadow-soft: 0 1px 2px rgb(20 26 17 / 0.12), 0 14px 40px -14px rgb(20 26 17 / 0.45);
+    --color-ivory: #f1f3ec;
+    --color-cream: #e7ebe0;
+    --color-champagne: #d6ddcc;
+    --color-sage-light: #dce3d2;
+    --color-sage-dark: #56654c;
+    --color-gold: #a99566;
+    --color-gold-deep: #56654c;
+    --color-ink: #2c3527;
+    --color-ink-soft: #4f5b48;
+    --color-line: #d3dbc8;
+    --shadow-soft: 0 1px 2px rgb(44 53 39 / 0.05), 0 12px 40px -12px rgb(44 53 39 / 0.16);
     background-color: var(--color-ivory);
     color: var(--color-ink);
   }
@@ -135,8 +136,8 @@
   /* Jemná zrnitosť papiera */
   .theme-sage.paper {
     background-image:
-      radial-gradient(circle at 20% 10%, rgb(251 248 242 / 0.06), transparent 45%),
-      radial-gradient(circle at 85% 80%, rgb(20 26 17 / 0.12), transparent 40%);
+      radial-gradient(circle at 20% 10%, rgb(255 255 255 / 0.55), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgb(214 221 204 / 0.5), transparent 40%);
   }
 
   .paper {

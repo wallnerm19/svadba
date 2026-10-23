@@ -1,0 +1,61 @@
+import {
+  Baby,
+  Bus,
+  Cake,
+  Camera,
+  Car,
+  Coffee,
+  DoorOpen,
+  Flower2,
+  Gem,
+  Gift,
+  Heart,
+  HeartHandshake,
+  House,
+  Mail,
+  Map,
+  Moon,
+  Music,
+  Phone,
+  Plane,
+  Shirt,
+  Sparkles,
+  SquareParking,
+  UtensilsCrossed,
+  Wine,
+  type LucideIcon,
+  type LucideProps,
+} from 'lucide-react';
+import type { IconName } from '../../types/wedding';
+
+const icons: Record<IconName, LucideIcon> = {
+  arrival: DoorOpen,
+  rings: Gem,
+  camera: Camera,
+  dinner: UtensilsCrossed,
+  dance: HeartHandshake,
+  music: Music,
+  cake: Cake,
+  moon: Moon,
+  heart: Heart,
+  champagne: Wine,
+  gift: Gift,
+  plane: Plane,
+  home: House,
+  car: Car,
+  bus: Bus,
+  parking: SquareParking,
+  shirt: Shirt,
+  child: Baby,
+  phone: Phone,
+  mail: Mail,
+  sparkles: Sparkles,
+  map: Map,
+  coffee: Coffee,
+  flower: Flower2,
+};
+
+export function Icon({ name, ...props }: { name: IconName } & LucideProps) {
+  const Component = icons[name] ?? Sparkles;
+  return <Component aria-hidden="true" strokeWidth={1.25} {...props} />;
+}

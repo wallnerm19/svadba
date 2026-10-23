@@ -1,0 +1,126 @@
+@import 'tailwindcss';
+
+/*
+ * ============================================================
+ *  DIZAJNOVÝ SYSTÉM – farby, písma, rozostupy
+ *  Zmenou hodnôt nižšie zmeníte vzhľad celej stránky.
+ * ============================================================
+ */
+@theme {
+  /* Farby */
+  --color-ivory: #fbf8f2;
+  --color-cream: #f5efe4;
+  --color-champagne: #ecdfc9;
+  --color-beige: #dccab0;
+  --color-sand: #c4ad8c;
+  --color-sage-light: #dfe4d6;
+  --color-sage: #8d9b7f;
+  --color-sage-dark: #56654c;
+  --color-gold: #b8975a;
+  --color-gold-deep: #7c6031;
+  --color-ink: #2f2a24;
+  --color-ink-soft: #5b5248;
+  --color-line: #e4d8c4;
+
+  /* Písma */
+  --font-serif: 'Cormorant Garamond Variable', 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Manrope Variable', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Typografia */
+  --text-display: clamp(3.4rem, 11vw, 9.5rem);
+  --text-display--line-height: 0.92;
+  --tracking-eyebrow: 0.32em;
+
+  /* Animácie */
+  --ease-elegant: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Tiene */
+  --shadow-soft: 0 1px 2px rgb(47 42 36 / 0.04), 0 12px 40px -12px rgb(47 42 36 / 0.14);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-ivory font-sans text-ink antialiased;
+    font-weight: 400;
+    line-height: 1.7;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    @apply bg-champagne text-ink;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold-deep);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-sans text-[0.7rem] font-semibold uppercase text-gold-deep;
+    letter-spacing: var(--tracking-eyebrow);
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-12;
+  }
+
+  /* Jemná zrnitosť papiera */
+  .paper {
+    background-image:
+      radial-gradient(circle at 20% 10%, rgb(236 223 201 / 0.55), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgb(223 228 214 / 0.6), transparent 40%);
+  }
+}
+
+@utility skip-link {
+  @apply sr-only;
+  &:focus {
+    @apply not-sr-only fixed top-4 left-4 z-[100] rounded-full bg-ink px-5 py-3 text-sm text-ivory;
+  }
+}
+
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}

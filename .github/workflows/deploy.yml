@@ -1,0 +1,62 @@
+# Automatické nasadenie svadobnej stránky na GitHub Pages pri každom pushi do vetvy main.
+name: Nasadenie na GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  # Umožní spustiť nasadenie aj ručne v záložke „Actions“.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Naraz beží len jedno nasadenie; prebiehajúce nasadenie sa nezruší.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stiahnutie kódu
+        uses: actions/checkout@v5
+
+      - name: Nastavenie Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Nastavenie GitHub Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Inštalácia závislostí
+        run: npm ci
+
+      - name: Zostavenie stránky
+        run: npm run build
+        env:
+          # Napr. "/svadba" – podľa názvu repozitára (alebo prázdne pri vlastnej doméne).
+          BASE_PATH: ${{ steps.pages.outputs.base_path }}/
+          # Plná adresa stránky pre náhľady pri zdieľaní (Open Graph).
+          SITE_URL: ${{ steps.pages.outputs.base_url }}/
+
+      - name: Nahratie artefaktu
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Nasadenie na GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

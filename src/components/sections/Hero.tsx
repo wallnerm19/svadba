@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { wedding } from '../../config/wedding';
 import { asset } from '../../lib/links';
-import { isSectionVisible, longDate, weekday } from '../../lib/wedding';
+import { firstName, isSectionVisible, longDate, secondName, weekday } from '../../lib/wedding';
 import { Countdown } from '../Countdown';
 import { ButtonLink } from '../ui/Button';
 
@@ -35,7 +35,7 @@ export function Hero() {
   const imageY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '18%']);
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', reduce ? '0%' : '12%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, reduce ? 1 : 0]);
-  const { bride, groom, separator } = wedding.couple;
+  const { separator } = wedding.couple;
   const fade = (delay: number) => ({
     initial: { opacity: 0, y: reduce ? 0 : 16 },
     animate: { opacity: 1, y: 0 },
@@ -83,9 +83,9 @@ export function Hero() {
         </motion.p>
 
         <h1 className="mt-6 font-serif text-display font-light tracking-[-0.02em]">
-          <span className="sr-only">{`${bride} ${separator} ${groom}`}</span>
+          <span className="sr-only">{`${firstName} ${separator} ${secondName}`}</span>
           <span className="flex flex-col items-center lg:flex-row lg:gap-[0.25em]">
-            <AnimatedName text={bride} delay={0.35} />
+            <AnimatedName text={firstName} delay={0.35} />
             <motion.span
               aria-hidden="true"
               className="my-1 font-serif text-[0.7em] text-champagne italic lg:my-0 lg:text-[0.7em]"
@@ -95,7 +95,7 @@ export function Hero() {
             >
               {separator}
             </motion.span>
-            <AnimatedName text={groom} delay={0.9} />
+            <AnimatedName text={secondName} delay={0.9} />
           </span>
         </h1>
 

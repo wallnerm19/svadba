@@ -6,7 +6,13 @@ import type { CalendarEvent } from './calendar';
 export const weddingStart = zonedTimeToDate(wedding.date.start, wedding.date.timeZone);
 export const weddingEnd = zonedTimeToDate(wedding.date.end, wedding.date.timeZone);
 
-export const coupleNames = `${wedding.couple.bride} ${wedding.couple.separator} ${wedding.couple.groom}`;
+/** Mená v poradí podľa couple.order (napr. „Marek“, „Veronika“). */
+export const [firstName, secondName] =
+  wedding.couple.order === 'groom-first'
+    ? [wedding.couple.groom, wedding.couple.bride]
+    : [wedding.couple.bride, wedding.couple.groom];
+
+export const coupleNames = `${firstName} ${wedding.couple.separator} ${secondName}`;
 export const longDate = formatLongDate(weddingStart, wedding.date.timeZone);
 export const weekday = formatWeekday(weddingStart, wedding.date.timeZone);
 export const shortDate = formatShortDate(weddingStart, wedding.date.timeZone);

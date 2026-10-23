@@ -15,23 +15,24 @@ import type { WeddingConfig } from '../types/wedding.ts';
  */
 export const wedding: WeddingConfig = {
   couple: {
-    bride: 'Michaela',
-    groom: 'Martin',
+    bride: 'Veronika',
+    groom: 'Marek',
     separator: '&',
+    order: 'groom-first',
   },
 
   date: {
-    start: '2027-06-20T15:00',
-    end: '2027-06-21T02:00',
+    start: '2027-04-30T15:00',
+    end: '2027-05-01T02:00',
     timeZone: 'Europe/Bratislava',
   },
 
-  location: 'Modra · Malé Karpaty',
+  location: 'Borinka · Malé Karpaty',
 
   seo: {
-    title: 'Michaela & Martin · Svadba 20. júna 2027',
+    title: 'Marek & Veronika · Svadba 30. apríla 2027',
     description:
-      'Svadobné oznámenie Michaely a Martina. Všetko o našom veľkom dni – miesto, harmonogram, ubytovanie a potvrdenie účasti.',
+      'Svadobné oznámenie Mareka a Veroniky. Všetko o našom veľkom dni – miesto, harmonogram, ubytovanie a potvrdenie účasti.',
     ogImage: 'og-image.png',
     siteUrl: '',
   },
@@ -62,7 +63,7 @@ export const wedding: WeddingConfig = {
     quote: 'Najkrajšie príbehy sú tie, ktoré píšeme spolu.',
     image: {
       src: 'images/hero.svg',
-      alt: 'Michaela a Martin pri západe slnka vo vinohrade',
+      alt: 'Marek a Veronika pri západe slnka v Malých Karpatoch',
       width: 2400,
       height: 1600,
       focus: '50% 40%',
@@ -85,12 +86,12 @@ export const wedding: WeddingConfig = {
         eyebrow: 'Jeseň 2019',
         title: 'Prvé stretnutie',
         paragraphs: [
-          'Spoznali sme sa na svadbe spoločných priateľov. Martin sedel pri vedľajšom stole a celý večer sa nevedel odhodlať prísť sa predstaviť.',
-          'Keď napokon hudba zahrala pomalú pieseň, vyzval Michaelu do tanca. Nikto z nás vtedy netušil, že jedného dňa budeme pozývať na vlastnú svadbu.',
+          'Spoznali sme sa na svadbe spoločných priateľov. Marek sedel pri vedľajšom stole a celý večer sa nevedel odhodlať prísť sa predstaviť.',
+          'Keď napokon hudba zahrala pomalú pieseň, vyzval Veroniku do tanca. Nikto z nás vtedy netušil, že jedného dňa budeme pozývať na vlastnú svadbu.',
         ],
         image: {
           src: 'images/story-1.svg',
-          alt: 'Michaela a Martin pri prvom spoločnom tanci',
+          alt: 'Marek a Veronika pri prvom spoločnom tanci',
           width: 1200,
           height: 1500,
         },
@@ -104,7 +105,7 @@ export const wedding: WeddingConfig = {
         ],
         image: {
           src: 'images/story-2.svg',
-          alt: 'Michaela a Martin na turistike v Malých Karpatoch',
+          alt: 'Marek a Veronika na turistike v Malých Karpatoch',
           width: 1200,
           height: 1500,
         },
@@ -113,8 +114,8 @@ export const wedding: WeddingConfig = {
         eyebrow: 'Leto 2026',
         title: 'Žiadosť o ruku',
         paragraphs: [
-          'Na mieste, kde sme sa prvýkrát pobozkali, pri západe slnka nad vinohradmi, si Martin kľakol na jedno koleno.',
-          'Michaela povedala „áno“ skôr, než stihol dokončiť otázku. A teraz by sme radi, aby ste ten najkrajší deň oslávili s nami.',
+          'Na mieste, kde sme sa prvýkrát pobozkali, pri západe slnka nad vinohradmi, si Marek kľakol na jedno koleno.',
+          'Veronika povedala „áno“ skôr, než stihol dokončiť otázku. A teraz by sme radi, aby ste ten najkrajší deň oslávili s nami.',
         ],
         image: {
           src: 'images/story-3.svg',
@@ -127,50 +128,50 @@ export const wedding: WeddingConfig = {
     timelineTitle: 'Naše míľniky',
     timeline: [
       { date: 'Október 2019', title: 'Prvý tanec', description: 'Svadba Lucie a Petra v Trnave' },
-      { date: 'Máj 2020', title: 'Prvé rande', description: 'Piknik nad Modrou' },
+      { date: 'Máj 2020', title: 'Prvé rande', description: 'Piknik v Malých Karpatoch' },
       { date: 'September 2022', title: 'Spoločný domov', description: 'Prvý byt a prvé vlastné kvety' },
       { date: 'Marec 2024', title: 'Prišiel Bruno', description: 'Najlepší pes na svete' },
       { date: 'August 2026', title: 'Zásnuby', description: 'Pri západe slnka vo vinohrade' },
-      { date: 'Jún 2027', title: 'Svadba', description: 'A príbeh pokračuje…' },
+      { date: 'Apríl 2027', title: 'Svadba', description: 'A príbeh pokračuje…' },
     ],
   },
 
   details: {
     eyebrow: 'Kedy a kde?',
     title: 'Svadobný deň',
-    intro: 'Obrad aj oslava sa uskutočnia v malebnom prostredí Malých Karpát, len pár minút od seba.',
+    intro: 'Obrad aj oslava sa uskutočnia na jednom mieste – v Bašte Pajštún v Borinke, v lone Malých Karpát.',
     ceremony: {
       label: 'Svadobný obrad',
-      name: 'Kaštieľ Lipová alej',
+      name: 'Bašta Pajštún',
       time: '15:00',
-      address: 'Lipová 12, 900 01 Modra',
-      description: 'Obrad sa uskutoční v zámockej záhrade. V prípade nepriaznivého počasia vo veľkej sále kaštieľa.',
+      address: '900 32 Borinka',
+      description: 'Svadobný obrad sa uskutoční v areáli Bašty Pajštún. V prípade nepriaznivého počasia sa presunieme dovnútra.',
       image: {
         src: 'images/ceremony.svg',
-        alt: 'Zámocká záhrada kaštieľa s kamenným oblúkom',
+        alt: 'Miesto svadobného obradu v Bašte Pajštún',
         width: 1400,
         height: 1000,
       },
     },
     reception: {
       label: 'Svadobná hostina',
-      name: 'Vinársky dvor Stará Hora',
+      name: 'Bašta Pajštún',
       time: '17:00',
-      address: 'Vinohradnícka 45, 900 01 Modra',
-      description: 'Večera, tanec a zábava až do skorých ranných hodín na terase s výhľadom na vinohrady.',
+      address: '900 32 Borinka',
+      description: 'Slávnostná večera, tanec a zábava až do skorých ranných hodín – bez presunov, na tom istom mieste.',
       image: {
         src: 'images/reception.svg',
-        alt: 'Terasa vinárskeho dvora s výhľadom na vinohrady',
+        alt: 'Priestory svadobnej hostiny v Bašte Pajštún',
         width: 1400,
         height: 1000,
       },
     },
     calendar: {
       title: 'Uložte si dátum',
-      eventTitle: 'Svadba Michaely a Martina',
+      eventTitle: 'Svadba Mareka a Veroniky',
       description: 'Pridajte si našu svadbu do kalendára, aby vám nič neušlo.',
       eventDescription:
-        'Svadba Michaely a Martina. Obrad o 15:00 v Kaštieli Lipová alej, hostina od 17:00 vo Vinárskom dvore Stará Hora. Viac informácií na našej svadobnej stránke.',
+        'Svadba Mareka a Veroniky. Obrad o 15:00 a hostina od 17:00 v Bašte Pajštún v Borinke. Viac informácií na našej svadobnej stránke.',
     },
   },
 
@@ -182,7 +183,7 @@ export const wedding: WeddingConfig = {
       {
         time: '14:00',
         title: 'Príchod hostí',
-        description: 'Privítanie s pohárom sektu v zámockej záhrade.',
+        description: 'Privítanie s pohárom sektu v Bašte Pajštún.',
         icon: 'arrival',
       },
       { time: '15:00', title: 'Svadobný obrad', description: 'Chvíľa, na ktorú sme čakali.', icon: 'rings' },
@@ -195,7 +196,7 @@ export const wedding: WeddingConfig = {
       {
         time: '17:00',
         title: 'Svadobná hostina',
-        description: 'Presun do Vinárskeho dvora a slávnostná večera.',
+        description: 'Slávnostná večera v Bašte Pajštún.',
         icon: 'dinner',
       },
       { time: '19:00', title: 'Prvý tanec', description: 'Prvý tanec novomanželov.', icon: 'dance' },
@@ -216,7 +217,7 @@ export const wedding: WeddingConfig = {
       'Budeme nesmierne radi, ak tento deň strávite s nami. Prosíme, dajte nám vedieť, či prídete – pomôže nám to so všetkými prípravami.',
     // ⚠️ Nahraďte odkazom na váš Google formulár (pozri README → „Nastavenie RSVP“).
     formUrl: 'https://docs.google.com/forms/d/e/VLOZTE-ID-FORMULARA/viewform',
-    deadline: '2027-04-30',
+    deadline: '2027-03-31',
     instructions: [
       'Vyplňte krátky formulár – zaberie to menej ako dve minúty.',
       'Každý hosť alebo pár vyplní formulár iba raz.',
@@ -249,13 +250,13 @@ export const wedding: WeddingConfig = {
       },
       {
         src: 'images/gallery-03.svg',
-        alt: 'Michaela pod kamenným oblúkom',
+        alt: 'Veronika pod kamenným oblúkom',
         width: 1200,
         height: 1500,
         caption: 'Toskánsko, 2023',
       },
       { src: 'images/gallery-04.svg', alt: 'Detail zásnubných prsteňov', width: 1200, height: 1200, caption: 'Áno!' },
-      { src: 'images/gallery-05.svg', alt: 'Martin s psom Brunom v lese', width: 1200, height: 1700, caption: 'Bruno' },
+      { src: 'images/gallery-05.svg', alt: 'Marek s psom Brunom v lese', width: 1200, height: 1700, caption: 'Bruno' },
       {
         src: 'images/gallery-06.svg',
         alt: 'Západ slnka pri mori',
@@ -273,14 +274,14 @@ export const wedding: WeddingConfig = {
       },
       {
         src: 'images/gallery-09.svg',
-        alt: 'Večerné svetlá nad vinohradom',
+        alt: 'Večerné svetlá nad Malými Karpatmi',
         width: 1600,
         height: 1100,
-        caption: 'Večer v Modre',
+        caption: 'Večer pod Pajštúnom',
       },
       {
         src: 'images/gallery-10.svg',
-        alt: 'Michaela a Martin v starom meste',
+        alt: 'Marek a Veronika v starom meste',
         width: 1200,
         height: 1600,
         caption: 'Spolu',
@@ -295,39 +296,39 @@ export const wedding: WeddingConfig = {
     accommodation: {
       title: 'Ubytovanie',
       intro:
-        'Pre hostí, ktorí prichádzajú z diaľky, sme predbežne rezervovali izby. Pri rezervácii uveďte heslo „Svadba M&M“.',
+        'Pre hostí, ktorí prichádzajú z diaľky, sme predbežne rezervovali izby. Pri rezervácii uveďte heslo „Svadba M&V“.',
       places: [
         {
-          name: 'Hotel Majolika',
-          address: 'Štúrova 54, 900 01 Modra',
-          distance: '5 min autom od miesta hostiny',
-          description: 'Útulný hotel v centre mesta s raňajkami.',
+          name: 'Penzión v Borinke',
+          address: '900 32 Borinka',
+          distance: 'pár minút od Bašty',
+          description: 'Ubytovanie priamo v obci – ideálne, ak si chcete po polnoci len prejsť do postele.',
           bookingUrl: 'https://www.booking.com/',
           phone: '+421 900 123 456',
         },
         {
-          name: 'Penzión Vinohrad',
-          address: 'Dolná 8, 900 01 Modra',
-          distance: '3 min pešo od Vinárskeho dvora',
-          description: 'Rodinný penzión priamo medzi vinohradmi.',
+          name: 'Hotel v Stupave',
+          address: '900 31 Stupava',
+          distance: '10 min autom',
+          description: 'Hotel s raňajkami v neďalekej Stupave.',
           bookingUrl: 'https://www.booking.com/',
         },
         {
-          name: 'Apartmány Harmónia',
-          address: 'Harmónia 3, 900 01 Modra – Harmónia',
-          distance: '10 min autom',
-          description: 'Apartmány v lese – ideálne pre rodiny s deťmi.',
+          name: 'Apartmány Marianka',
+          address: '900 33 Marianka',
+          distance: '15 min autom',
+          description: 'Apartmány v pokojnom prostredí – vhodné pre rodiny s deťmi.',
           bookingUrl: 'https://www.booking.com/',
         },
       ],
-      note: 'Izby sú pre vás držané do 31. marca 2027. Potom ich hotel uvoľní do bežného predaja.',
+      note: 'Izby sú pre vás držané do 15. marca 2027. Potom ich hotel uvoľní do bežného predaja.',
     },
     cards: [
       {
         icon: 'parking',
         title: 'Parkovanie',
         paragraphs: [
-          'Bezplatné parkovanie je k dispozícii priamo pri kaštieli aj pri Vinárskom dvore.',
+          'Bezplatné parkovanie je k dispozícii priamo pri Bašte Pajštún.',
           'Auto môžete pokojne nechať pri hostine cez noc a vyzdvihnúť si ho na druhý deň.',
         ],
       },
@@ -335,16 +336,16 @@ export const wedding: WeddingConfig = {
         icon: 'bus',
         title: 'Doprava',
         paragraphs: [
-          'Medzi obradom a hostinou zabezpečíme kyvadlovú dopravu mikrobusom.',
-          'Po polnoci budú pre hostí v hoteloch pripravené odvozy – stačí sa ozvať svedkom.',
+          'Obrad aj hostina sú na jednom mieste, takže sa počas dňa nikam nepresúvame.',
+          'Po polnoci budú pre hostí ubytovaných v okolí pripravené odvozy – stačí sa ozvať svedkom.',
         ],
       },
       {
         icon: 'map',
         title: 'Ako sa k nám dostanete',
         paragraphs: [
-          'Z Bratislavy po ceste I/502 cez Pezinok približne 35 minút.',
-          'Vlakom do stanice Šenkvice, odkiaľ vás radi vyzdvihneme.',
+          'Z Bratislavy po diaľnici D2 (výjazd Stupava) a ďalej cez Stupavu do Borinky – približne 25 minút.',
+          'Vlakom do Stupavy, odkiaľ vás radi vyzdvihneme.',
         ],
       },
       {
@@ -359,7 +360,7 @@ export const wedding: WeddingConfig = {
     dressCode: {
       title: 'Dress code',
       description:
-        'Elegantne a letne. Pánom odporúčame oblek (kravata nie je povinná), dámam šaty v jemných pastelových či zemitých tónoch. Obrad bude na tráve – zvážte pohodlnejšie podpätky.',
+        'Elegantne a jarne. Pánom odporúčame oblek (kravata nie je povinná), dámam šaty v jemných pastelových či zemitých tónoch. Koncom apríla býva večer chladnejšie – pribaľte si šál alebo sako.',
       palette: [
         { name: 'Šampanská', hex: '#E8D9BF' },
         { name: 'Šalviová', hex: '#A3AF94' },
@@ -377,7 +378,7 @@ export const wedding: WeddingConfig = {
       },
       {
         question: 'Do kedy mám potvrdiť účasť?',
-        answer: 'Najneskôr do 30. apríla 2027. Pomôže nám to s finálnym počtom hostí a menu.',
+        answer: 'Najneskôr do 31. marca 2027. Pomôže nám to s finálnym počtom hostí a menu.',
       },
       {
         question: 'Môžem fotiť počas obradu?',
@@ -397,7 +398,7 @@ export const wedding: WeddingConfig = {
     contacts: [
       { name: 'Zuzana Kováčová', role: 'Svedkyňa', phone: '+421 900 111 222', email: 'zuzana@example.com' },
       { name: 'Tomáš Horváth', role: 'Svedok', phone: '+421 900 333 444', email: 'tomas@example.com' },
-      { name: 'Michaela & Martin', role: 'Nevesta a ženích', email: 'svadba@example.com' },
+      { name: 'Marek & Veronika', role: 'Ženích a nevesta', email: 'svadba@example.com' },
     ],
   },
 
@@ -424,7 +425,7 @@ export const wedding: WeddingConfig = {
         description: 'Namiesto kytice nás poteší vaše milé slovo alebo kniha s venovaním.',
       },
     ],
-    signature: 'S láskou, Michaela & Martin',
+    signature: 'S láskou, Marek & Veronika',
   },
 
   closing: {
@@ -433,7 +434,7 @@ export const wedding: WeddingConfig = {
     message: 'Najväčšou radosťou pre nás bude, keď tento výnimočný deň oslávite spolu s nami.',
     image: {
       src: 'images/closing.svg',
-      alt: 'Michaela a Martin kráčajú ruka v ruke pri západe slnka',
+      alt: 'Marek a Veronika kráčajú ruka v ruke pri západe slnka',
       width: 2400,
       height: 1600,
     },

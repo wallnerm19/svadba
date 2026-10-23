@@ -2,13 +2,13 @@ import { useEffect, useRef, useState, type MouseEvent } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Menu, X } from 'lucide-react';
 import { wedding } from '../../config/wedding';
-import { isSectionVisible, longDate } from '../../lib/wedding';
+import { firstName, isSectionVisible, longDate, secondName } from '../../lib/wedding';
 import { useActiveSection, useScrolled } from '../../hooks/useActiveSection';
 
 const items = wedding.navigation.filter((item) => isSectionVisible(item.id));
 const links = items.filter((item) => item.id !== 'rsvp');
 const rsvpItem = items.find((item) => item.id === 'rsvp');
-const monogram = `${wedding.couple.bride[0]}${wedding.couple.separator}${wedding.couple.groom[0]}`;
+const monogram = `${firstName[0]}${wedding.couple.separator}${secondName[0]}`;
 
 export function Navigation() {
   const scrolled = useScrolled(60);
@@ -91,7 +91,7 @@ export function Navigation() {
           <a
             href="#uvod"
             className={`font-serif text-2xl tracking-wide transition-colors duration-500 ${tone}`}
-            aria-label={`${wedding.couple.bride} a ${wedding.couple.groom} – späť na úvod`}
+            aria-label={`${firstName} a ${secondName} – späť na úvod`}
             onClick={() => setOpen(false)}
           >
             {monogram}

@@ -1,4 +1,4 @@
-# Svadobná stránka – Michaela & Martin
+# Svadobná stránka – Marek & Veronika
 
 Elegantná svadobná stránka (digitálne oznámenie a informačný portál pre hostí), ktorú je možné **zadarmo** zverejniť na GitHub Pages. Nepotrebuje server, databázu ani platený hosting.
 
@@ -67,17 +67,17 @@ a otvorte **http://localhost:4173/svadba/**.
 ### Mená
 
 ```ts
-couple: { bride: 'Michaela', groom: 'Martin', separator: '&' },
+couple: { bride: 'Veronika', groom: 'Marek', separator: '&', order: 'groom-first' },
 ```
 
-Nezabudnite upraviť aj `seo.title` a `seo.description` (názov v záložke prehliadača a pri zdieľaní) a `details.calendar.eventTitle` (v správnom páde, napr. „Svadba Michaely a Martina“).
+Nezabudnite upraviť aj `seo.title` a `seo.description` (názov v záložke prehliadača a pri zdieľaní) a `details.calendar.eventTitle` (v správnom páde, napr. „Svadba Mareka a Veroniky“). Pole `order` určuje poradie mien na stránke (`'groom-first'` = Marek & Veronika, `'bride-first'` = Veronika & Marek).
 
 ### Dátum a čas
 
 ```ts
 date: {
-  start: '2027-06-20T15:00',   // začiatok obradu – do tohto okamihu beží odpočet
-  end:   '2027-06-21T02:00',   // koniec osláv (pre kalendár)
+  start: '2027-04-30T15:00',   // začiatok obradu – do tohto okamihu beží odpočet
+  end:   '2027-05-01T02:00',   // koniec osláv (pre kalendár)
   timeZone: 'Europe/Bratislava',
 },
 ```
@@ -163,7 +163,7 @@ Stránka je statická, preto odpovede hostí zbiera **Google Forms** a ukladá i
 ### Vytvorenie formulára
 
 1. Otvorte [forms.google.com](https://forms.google.com) → **Prázdny formulár**.
-2. Názov: napr. „Potvrdenie účasti – Michaela & Martin“.
+2. Názov: napr. „Potvrdenie účasti – Marek & Veronika“.
 3. Pridajte otázky:
 
    | Otázka | Typ | Povinná |
@@ -184,7 +184,7 @@ Stránka je statická, preto odpovede hostí zbiera **Google Forms** a ukladá i
    ```ts
    rsvp: {
      formUrl: 'https://docs.google.com/forms/d/e/1FAIpQL…/viewform',
-     deadline: '2027-04-30',
+     deadline: '2027-03-31',
      …
    }
    ```

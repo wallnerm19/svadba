@@ -130,6 +130,8 @@ export interface WeddingConfig {
     groom: string;
     /** Spojka medzi menami – zvyčajne „&“. */
     separator: string;
+    /** Poradie mien na stránke: 'bride-first' (nevesta & ženích) alebo 'groom-first' (ženích & nevesta). */
+    order: 'bride-first' | 'groom-first';
   };
 
   date: {

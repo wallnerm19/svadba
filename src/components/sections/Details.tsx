@@ -60,7 +60,7 @@ function VenueCard({ venue, delay }: { venue: Venue; delay: number }) {
 export function Details() {
   const { details } = wedding;
   return (
-    <section id="svadba" aria-labelledby="svadba-title" className="relative bg-cream py-24 sm:py-36">
+    <section id="svadba" aria-labelledby="svadba-title" className="theme-sage relative bg-cream py-24 sm:py-36">
       <div className="container-page">
         <SectionHeading id="svadba-title" eyebrow={details.eyebrow} title={details.title} intro={details.intro} />
 

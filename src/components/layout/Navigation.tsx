@@ -79,7 +79,7 @@ export function Navigation() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,backdrop-filter] duration-500 ease-elegant ${
-          solid ? 'bg-ivory/90 shadow-[0_1px_0_var(--color-line)] backdrop-blur-md' : 'bg-transparent'
+          solid ? 'theme-sage bg-ivory/90 shadow-[0_1px_0_var(--color-line)] backdrop-blur-md' : 'bg-transparent'
         }`}
       >
         <nav
@@ -166,7 +166,7 @@ export function Navigation() {
           <motion.div
             ref={panelRef}
             id="mobile-menu"
-            className="paper fixed inset-0 z-40 flex flex-col bg-ivory px-8 pt-28 pb-10 lg:hidden"
+            className="theme-sage paper fixed inset-0 z-40 flex flex-col bg-ivory px-8 pt-28 pb-10 lg:hidden"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

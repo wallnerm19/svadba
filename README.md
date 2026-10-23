@@ -136,16 +136,21 @@ Skryté sekcie sa automaticky odstránia aj z navigácie. Poradie a názvy polo�
 
 ### Farby a písma
 
-Dizajnový systém je v [`src/index.css`](src/index.css) v bloku `@theme`:
+Stránka používa **tmavú šalviovú zelenú** so svetlým textom a šampanskými akcentmi (rovnako ako sekcia RSVP). Farby sú v [`src/index.css`](src/index.css):
 
-```css
---color-ivory: #fbf8f2;      /* pozadie */
---color-champagne: #ecdfc9;
---color-sage-dark: #56654c;  /* tmavé sekcie (RSVP, dress code) */
---color-gold: #b8975a;       /* ozdobné prvky */
---color-gold-deep: #7c6031;  /* malé zlaté texty (dostatočný kontrast) */
---color-ink: #2f2a24;        /* hlavný text */
-```
+- trieda **`.theme-sage`** – farby obsahových sekcií (Príbeh, Svadba, Harmonogram, Galéria, Informácie, Dary), navigácie a mobilného menu:
+
+  ```css
+  --color-ivory: #56654c;      /* plocha sekcií a kariet */
+  --color-cream: #4c5a43;      /* tmavší odtieň pre striedanie sekcií */
+  --color-ink: #fbf8f2;        /* hlavný (svetlý) text */
+  --color-ink-soft: #e0e3d8;   /* vedľajší text */
+  --color-gold-deep: #ecdfc9;  /* šampanské nadpisy a akcenty */
+  ```
+
+- blok **`@theme`** – základné farby (sekcia RSVP `--color-sage-dark`, text na fotografiách, galéria).
+
+Ak by ste sa chceli vrátiť k svetlej (slonovinovej) verzii, stačí odstrániť triedu `theme-sage` z jednotlivých sekcií.
 
 Písma sú uložené priamo v projekte (bez Google Fonts – rýchlejšie a bez sledovania hostí):
 

@@ -6,7 +6,7 @@ import { SectionHeading } from '../ui/SectionHeading';
 export function Story() {
   const { story } = wedding;
   return (
-    <section id="nas-pribeh" aria-labelledby="nas-pribeh-title" className="paper relative py-24 sm:py-36">
+    <section id="nas-pribeh" aria-labelledby="nas-pribeh-title" className="theme-sage paper relative py-24 sm:py-36">
       <div className="container-page">
         <SectionHeading id="nas-pribeh-title" eyebrow={story.eyebrow} title={story.title} intro={story.intro} />
 

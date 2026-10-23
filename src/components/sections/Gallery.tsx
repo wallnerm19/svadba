@@ -11,7 +11,7 @@ export function Gallery() {
   const [index, setIndex] = useState<number | null>(null);
 
   return (
-    <section id="fotogaleria" aria-labelledby="fotogaleria-title" className="bg-cream py-24 sm:py-36">
+    <section id="fotogaleria" aria-labelledby="fotogaleria-title" className="theme-sage bg-cream py-24 sm:py-36">
       <div className="container-page">
         <SectionHeading id="fotogaleria-title" eyebrow={gallery.eyebrow} title={gallery.title} intro={gallery.intro} />
 
@@ -35,7 +35,7 @@ export function Gallery() {
                 />
                 <span
                   aria-hidden="true"
-                  className="absolute inset-0 flex items-end justify-between bg-linear-to-t from-ink/55 via-transparent to-transparent p-4 text-left text-ivory opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
+                  className="absolute inset-0 flex items-end justify-between bg-linear-to-t from-[#1f261b]/65 via-transparent to-transparent p-4 text-left text-[#fbf8f2] opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100"
                 >
                   <span className="font-serif text-lg italic">{image.caption}</span>
                   <Expand size={18} strokeWidth={1.25} />

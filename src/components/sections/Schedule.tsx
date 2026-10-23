@@ -12,7 +12,7 @@ export function Schedule() {
   const { scrollYProgress } = useScroll({ target: listRef, offset: ['start 75%', 'end 60%'] });
 
   return (
-    <section id="harmonogram" aria-labelledby="harmonogram-title" className="paper relative py-24 sm:py-36">
+    <section id="harmonogram" aria-labelledby="harmonogram-title" className="theme-sage paper relative py-24 sm:py-36">
       <div className="container-page">
         <SectionHeading
           id="harmonogram-title"

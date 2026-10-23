@@ -6,7 +6,7 @@ import { SectionHeading } from '../ui/SectionHeading';
 export function Gifts() {
   const { gifts } = wedding;
   return (
-    <section id="dary" aria-labelledby="dary-title" className="bg-champagne/45 py-24 sm:py-36">
+    <section id="dary" aria-labelledby="dary-title" className="theme-sage bg-cream py-24 sm:py-36">
       <div className="container-page">
         <SectionHeading id="dary-title" eyebrow={gifts.eyebrow} title={gifts.title} intro={gifts.intro} />
 
@@ -20,7 +20,7 @@ export function Gifts() {
               as="li"
               key={option.title}
               delay={i * 0.1}
-              className="bg-ivory/80 px-7 py-10 text-center shadow-soft"
+              className="border border-line bg-ivory px-7 py-10 text-center shadow-soft"
             >
               <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-gold/50 text-gold-deep">
                 <Icon name={option.icon} size={22} />

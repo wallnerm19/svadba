@@ -97,7 +97,7 @@ export function Lightbox({ images, index, onClose, onIndexChange }: LightboxProp
           role="dialog"
           aria-modal="true"
           aria-label={`Fotografia ${index + 1} z ${images.length}`}
-          className="fixed inset-0 z-[60] flex flex-col bg-[#1d1915]/97 text-ivory backdrop-blur-sm"
+          className="theme-reset fixed inset-0 z-[60] flex flex-col bg-[#1d1915]/97 text-ivory backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

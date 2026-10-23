@@ -22,7 +22,7 @@ export function Info() {
   const { info } = wedding;
 
   return (
-    <section id="informacie" aria-labelledby="informacie-title" className="paper py-24 sm:py-36">
+    <section id="informacie" aria-labelledby="informacie-title" className="theme-sage paper py-24 sm:py-36">
       <div className="container-page">
         <SectionHeading id="informacie-title" eyebrow={info.eyebrow} title={info.title} intro={info.intro} />
 
@@ -94,21 +94,21 @@ export function Info() {
         </ul>
 
         {/* Dress code */}
-        <Reveal className="mt-24 grid items-center gap-10 bg-sage-dark px-7 py-14 text-ivory sm:mt-32 sm:px-14 sm:py-20 lg:grid-cols-2 lg:gap-16">
+        <Reveal className="mt-24 grid items-center gap-10 border border-line bg-cream px-7 py-14 text-ink sm:mt-32 sm:px-14 sm:py-20 lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className="eyebrow !text-champagne">Oblečenie</p>
+            <p className="eyebrow">Oblečenie</p>
             <h3 className="mt-4 text-4xl sm:text-5xl">{info.dressCode.title}</h3>
-            <p className="mt-6 text-ivory/85 sm:text-lg">{info.dressCode.description}</p>
+            <p className="mt-6 text-ink-soft sm:text-lg">{info.dressCode.description}</p>
           </div>
           <ul className="flex flex-wrap justify-center gap-5 sm:gap-7 lg:justify-end" aria-label="Farebná inšpirácia">
             {info.dressCode.palette.map((color) => (
               <li key={color.hex} className="flex flex-col items-center gap-3">
                 <span
-                  className="h-16 w-16 rounded-full shadow-[inset_0_0_0_1px_rgb(255_255_255/0.25)] ring-1 ring-ivory/30 ring-offset-4 ring-offset-sage-dark sm:h-20 sm:w-20"
+                  className="h-16 w-16 rounded-full shadow-[inset_0_0_0_1px_rgb(255_255_255/0.25)] ring-1 ring-ink/30 ring-offset-4 ring-offset-cream sm:h-20 sm:w-20"
                   style={{ backgroundColor: color.hex }}
                   aria-hidden="true"
                 />
-                <span className="text-[0.65rem] uppercase tracking-[0.2em] text-ivory/80">{color.name}</span>
+                <span className="text-[0.65rem] uppercase tracking-[0.2em] text-ink-soft">{color.name}</span>
               </li>
             ))}
           </ul>

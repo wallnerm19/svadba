@@ -47,7 +47,7 @@
   }
 
   body {
-    @apply bg-ivory font-sans text-ink antialiased;
+    @apply bg-sage-dark font-sans text-ink antialiased;
     font-weight: 400;
     line-height: 1.7;
     text-rendering: optimizeLegibility;
@@ -101,7 +101,44 @@
     @apply mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-12;
   }
 
+  /*
+   * Tmavá šalviová téma (rovnaké farby ako sekcia RSVP).
+   * Prehodí farebné premenné vo vnútri prvku: „ivory/cream“ sú plochy,
+   * „ink“ je svetlý text, „gold“ sú šampanské akcenty.
+   * Úprava odtieňov zelenej: zmeňte hodnoty nižšie.
+   */
+  .theme-sage {
+    --color-ivory: #56654c;
+    --color-cream: #4c5a43;
+    --color-champagne: #6e7e63;
+    --color-sage-light: rgb(251 248 242 / 0.1);
+    --color-sage-dark: #ecdfc9;
+    --color-gold: #d6c29c;
+    --color-gold-deep: #ecdfc9;
+    --color-ink: #fbf8f2;
+    --color-ink-soft: #e0e3d8;
+    --color-line: rgb(251 248 242 / 0.2);
+    --shadow-soft: 0 1px 2px rgb(20 26 17 / 0.12), 0 14px 40px -14px rgb(20 26 17 / 0.45);
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+  }
+
+  /* Pôvodné svetlé farby – pre prvky vo vnútri .theme-sage, ktoré majú zostať tmavé so svetlým textom (galéria). */
+  .theme-reset {
+    --color-ivory: #fbf8f2;
+    --color-cream: #f5efe4;
+    --color-champagne: #ecdfc9;
+    --color-ink: #2f2a24;
+    --color-ink-soft: #5b5248;
+  }
+
   /* Jemná zrnitosť papiera */
+  .theme-sage.paper {
+    background-image:
+      radial-gradient(circle at 20% 10%, rgb(251 248 242 / 0.06), transparent 45%),
+      radial-gradient(circle at 85% 80%, rgb(20 26 17 / 0.12), transparent 40%);
+  }
+
   .paper {
     background-image:
       radial-gradient(circle at 20% 10%, rgb(236 223 201 / 0.55), transparent 45%),

@@ -145,7 +145,8 @@ export const wedding: WeddingConfig = {
       name: 'Bašta Pajštún',
       time: '15:00',
       address: '900 32 Borinka',
-      description: 'Svadobný obrad sa uskutoční v areáli Bašty Pajštún. V prípade nepriaznivého počasia sa presunieme dovnútra.',
+      description:
+        'Svadobný obrad sa uskutoční v areáli Bašty Pajštún. V prípade nepriaznivého počasia sa presunieme dovnútra.',
       image: {
         src: 'images/ceremony.svg',
         alt: 'Miesto svadobného obradu v Bašte Pajštún',

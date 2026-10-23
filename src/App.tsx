@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MotionConfig } from 'motion/react';
 import { wedding } from './config/wedding';
 import { Envelope } from './components/Envelope';
@@ -25,6 +25,15 @@ export default function App() {
   const { sections } = wedding;
   const [showEnvelope, setShowEnvelope] = useState(shouldShowEnvelope);
   const [introReady, setIntroReady] = useState(() => !showEnvelope);
+
+  // Odkaz priamo na sekciu (napr. …/svadba/#rsvp): prehliadač hľadá kotvu skôr, než sa stránka
+  // vykreslí, preto sa na ňu posunieme sami.
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id || showEnvelope) return;
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    document.getElementById(id)?.scrollIntoView({ behavior: 'instant' });
+  }, []);
 
   return (
     <MotionConfig reducedMotion="user">

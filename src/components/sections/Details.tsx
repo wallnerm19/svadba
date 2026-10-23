@@ -57,6 +57,56 @@ function VenueCard({ venue, delay }: { venue: Venue; delay: number }) {
   );
 }
 
+/** Mapa miesta svadby – Google Maps vložené bez API kľúča, načíta sa až pri priblížení k sekcii. */
+function VenueMap() {
+  const { map, ceremony } = wedding.details;
+  const coords = `${map.lat},${map.lng}`;
+  // Priama adresa na vloženie (staršie „?output=embed“ presmeruje s hlavičkou, ktorá vloženie zakazuje).
+  const embedUrl = `https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1s${coords}!6i${map.zoom}!3m1!1ssk!5m1!1ssk`;
+  const openUrl = `https://www.google.com/maps/search/?api=1&query=${coords}`;
+
+  return (
+    <Reveal className="mt-20 overflow-hidden border border-line bg-ivory shadow-soft">
+      <div className="grid lg:grid-cols-[1fr_20rem]">
+        <div className="relative aspect-[4/3] bg-champagne sm:aspect-[16/9] lg:aspect-auto lg:min-h-[26rem]">
+          <iframe
+            src={embedUrl}
+            title={`Mapa – ${ceremony.name}`}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+            // Jemné stlmenie farieb, aby mapa ladila so šalviovou paletou.
+            className="absolute inset-0 h-full w-full border-0 [filter:grayscale(0.35)_sepia(0.12)_saturate(0.9)]"
+          />
+        </div>
+        <div className="flex flex-col justify-center gap-5 px-7 py-10 text-center sm:px-10 lg:text-left">
+          <p className="eyebrow">{ceremony.name}</p>
+          <h3 className="text-3xl leading-tight text-ink sm:text-4xl">{map.title}</h3>
+          {map.description && <p className="text-ink-soft">{map.description}</p>}
+          <p className="flex items-center justify-center gap-2 text-sm text-ink-soft lg:justify-start">
+            <MapPin size={15} strokeWidth={1.5} className="shrink-0 text-gold" aria-hidden="true" />
+            <span>
+              GPS{' '}
+              <span className="tabular-nums">
+                {map.lat}, {map.lng}
+              </span>
+            </span>
+          </p>
+          <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-center lg:flex-col">
+            <ButtonLink href={mapsUrl(ceremony)} external variant="primary">
+              <Navigation size={15} strokeWidth={1.5} aria-hidden="true" />
+              Navigovať
+            </ButtonLink>
+            <ButtonLink href={openUrl} external variant="outline">
+              Otvoriť v Mapách
+            </ButtonLink>
+          </div>
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
 export function Details() {
   const { details } = wedding;
   return (
@@ -73,6 +123,8 @@ export function Details() {
           <VenueCard venue={details.ceremony} delay={0} />
           <VenueCard venue={details.reception} delay={0.12} />
         </div>
+
+        {details.map.enabled && <VenueMap />}
 
         <Reveal className="mx-auto mt-20 max-w-2xl border border-line bg-ivory/60 px-6 py-12 text-center sm:px-12">
           <h3 className="text-3xl text-ink sm:text-4xl">{details.calendar.title}</h3>

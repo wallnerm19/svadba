@@ -183,6 +183,14 @@ export const wedding: WeddingConfig = {
       eventDescription:
         'Svadba Mareka a Veroniky. Obrad o 15:00 a hostina od 17:00 v Bašte Pajštún v Borinke. Viac informácií na našej svadobnej stránke.',
     },
+    map: {
+      enabled: true,
+      title: 'Kde nás nájdete',
+      description: 'Baštu Pajštún nájdete nad obcou Borinka, neďaleko hradu Pajštún.',
+      lat: 48.27419,
+      lng: 17.070555,
+      zoom: 15,
+    },
   },
 
   schedule: {

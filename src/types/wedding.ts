@@ -211,6 +211,17 @@ export interface WeddingConfig {
       /** Popis udalosti v kalendári hosťa. */
       eventDescription: string;
     };
+    /** Mapa miesta svadby (Google Maps, bez API kľúča). */
+    map: {
+      enabled: boolean;
+      title: string;
+      description?: string;
+      /** GPS súradnice bodu na mape. */
+      lat: number;
+      lng: number;
+      /** Priblíženie mapy (1 = celý svet, 18 = jednotlivé budovy). */
+      zoom: number;
+    };
   };
 
   schedule: SectionHeading & {

@@ -144,7 +144,8 @@ export const wedding: WeddingConfig = {
       label: 'Svadobný obrad',
       name: 'Bašta Pajštún',
       time: '15:00',
-      address: '900 32 Borinka',
+      address: '900 32 Borinka · GPS 48.27419, 17.070555',
+      mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=48.27419,17.070555',
       description:
         'Svadobný obrad sa uskutoční v areáli Bašty Pajštún. V prípade nepriaznivého počasia sa presunieme dovnútra.',
       image: {
@@ -158,7 +159,8 @@ export const wedding: WeddingConfig = {
       label: 'Svadobná hostina',
       name: 'Bašta Pajštún',
       time: '17:00',
-      address: '900 32 Borinka',
+      address: '900 32 Borinka · GPS 48.27419, 17.070555',
+      mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=48.27419,17.070555',
       description: 'Slávnostná večera, tanec a zábava až do skorých ranných hodín – bez presunov, na tom istom mieste.',
       image: {
         src: 'images/reception.svg',
@@ -347,6 +349,7 @@ export const wedding: WeddingConfig = {
         paragraphs: [
           'Z Bratislavy po diaľnici D2 (výjazd Stupava) a ďalej cez Stupavu do Borinky – približne 25 minút.',
           'Vlakom do Stupavy, odkiaľ vás radi vyzdvihneme.',
+          'Do navigácie zadajte GPS súradnice 48.27419, 17.070555 – alebo použite tlačidlo „Navigovať“ v sekcii Svadba.',
         ],
       },
       {

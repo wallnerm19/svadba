@@ -165,7 +165,20 @@ Iné písmo nainštalujete z [Fontsource](https://fontsource.org/), napr. `npm i
 
 Stránka je statická, preto odpovede hostí zbiera **Google Forms** a ukladá ich do **Google Sheets**. Na stránke je tlačidlo, ktoré formulár otvorí.
 
-### Vytvorenie formulára
+### Automatické vytvorenie formulára (odporúčané)
+
+Súbor [`google-forms/rsvp-formular.gs`](google-forms/rsvp-formular.gs) vytvorí celý formulár jedným kliknutím – so všetkými otázkami, vetvením (kto nepríde, preskočí detaily) a s napojenou Google Tabuľkou.
+
+1. Otvorte [script.google.com](https://script.google.com) → **Nový projekt**.
+2. Zmažte ukážkový kód a vložte celý obsah súboru `rsvp-formular.gs`. Projekt uložte (Ctrl + S).
+3. V hornej lište vyberte funkciu **`vytvorFormular`** a kliknite **Spustiť**.
+4. Google si vypýta oprávnenia: **Skontrolovať povolenia** → vyberte svoj účet → ak sa zobrazí „Google túto aplikáciu neoveril“, kliknite **Rozšírené → Prejsť na … (nebezpečné)** → **Povoliť**. (Ide o váš vlastný skript, ktorý vytvára súbory len vo vašom Google Drive.)
+5. V **Denníku vykonávania** sa zobrazia tri odkazy: pre hostí (`…/viewform`), na úpravu formulára a na tabuľku s odpoveďami.
+6. Odkaz pre hostí vložte do `src/config/wedding.ts` → `rsvp.formUrl`.
+
+Texty (názov, úvod, poďakovanie) upravíte v objekte `NASTAVENIA` na začiatku skriptu, otázky kedykoľvek neskôr priamo v Google Forms.
+
+### Ručné vytvorenie formulára
 
 1. Otvorte [forms.google.com](https://forms.google.com) → **Prázdny formulár**.
 2. Názov: napr. „Potvrdenie účasti – Marek & Veronika“.

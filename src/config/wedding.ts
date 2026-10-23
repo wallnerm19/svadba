@@ -86,12 +86,12 @@ export const wedding: WeddingConfig = {
         eyebrow: 'Jeseň 2019',
         title: 'Prvé stretnutie',
         paragraphs: [
-          'Spoznali sme sa na svadbe spoločných priateľov. Marek sedel pri vedľajšom stole a celý večer sa nevedel odhodlať prísť sa predstaviť.',
-          'Keď napokon hudba zahrala pomalú pieseň, vyzval Veroniku do tanca. Nikto z nás vtedy netušil, že jedného dňa budeme pozývať na vlastnú svadbu.',
+          'Spoznali sme sa na veľkej firemnej akcii, kde sa stretlo vyše tristo ľudí. Veronika bola vo firme len pár dní – a hneď sa ocitla uprostred celofiremnej oslavy.',
+          'Marek si ju všimol takmer okamžite. V celom tom dave mal oči len pre ňu – a od toho večera na ňu neprestal myslieť.',
         ],
         image: {
           src: 'images/story-1.svg',
-          alt: 'Marek a Veronika pri prvom spoločnom tanci',
+          alt: 'Marek a Veronika na firemnej akcii, kde sa spoznali',
           width: 1200,
           height: 1500,
         },
@@ -127,7 +127,7 @@ export const wedding: WeddingConfig = {
     ],
     timelineTitle: 'Naše míľniky',
     timeline: [
-      { date: 'Október 2019', title: 'Prvý tanec', description: 'Svadba Lucie a Petra v Trnave' },
+      { date: 'Október 2019', title: 'Prvé stretnutie', description: 'Firemná akcia pre vyše 300 ľudí' },
       { date: 'Máj 2020', title: 'Prvé rande', description: 'Piknik v Malých Karpatoch' },
       { date: 'September 2022', title: 'Spoločný domov', description: 'Prvý byt a prvé vlastné kvety' },
       { date: 'Marec 2024', title: 'Prišiel Bruno', description: 'Najlepší pes na svete' },

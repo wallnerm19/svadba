@@ -27,7 +27,7 @@ export const wedding: WeddingConfig = {
     timeZone: 'Europe/Bratislava',
   },
 
-  location: 'Borinka · Malé Karpaty',
+  location: 'Bašta Pajštún · Borinka',
 
   seo: {
     title: 'Marek & Veronika · Svadba 30. apríla 2027',
@@ -39,7 +39,6 @@ export const wedding: WeddingConfig = {
 
   sections: {
     story: true,
-    storyTimeline: true,
     schedule: true,
     gallery: true,
     info: true,
@@ -49,12 +48,12 @@ export const wedding: WeddingConfig = {
 
   navigation: [
     { id: 'uvod', label: 'Úvod' },
-    { id: 'nas-pribeh', label: 'Náš príbeh' },
+    { id: 'o-nas', label: 'O nás' },
     { id: 'svadba', label: 'Svadba' },
     { id: 'harmonogram', label: 'Harmonogram' },
-    { id: 'fotogaleria', label: 'Fotogaléria' },
     { id: 'informacie', label: 'Informácie' },
-    { id: 'rsvp', label: 'RSVP' },
+    { id: 'fotogaleria', label: 'Fotogaléria' },
+    { id: 'rsvp', label: 'Potvrdenie účasti' },
   ],
 
   envelope: {
@@ -70,7 +69,7 @@ export const wedding: WeddingConfig = {
     quote: 'Najkrajšie príbehy sú tie, ktoré píšeme spolu.',
     image: {
       src: 'images/hero.svg',
-      alt: 'Marek a Veronika pri západe slnka v Malých Karpatoch',
+      alt: 'Marek a Veronika pri západe slnka',
       width: 2400,
       height: 1600,
       focus: '50% 40%',
@@ -84,95 +83,36 @@ export const wedding: WeddingConfig = {
   },
 
   story: {
-    eyebrow: 'Náš príbeh',
-    title: 'Ako sa to všetko začalo',
-    intro:
-      'Niektoré stretnutia sa nedajú naplánovať. Ten náš sa začal celkom obyčajne – a odvtedy je každý deň trochu výnimočnejší.',
-    chapters: [
-      {
-        eyebrow: 'Jeseň 2019',
-        title: 'Prvé stretnutie',
-        paragraphs: [
-          'Spoznali sme sa na veľkej firemnej akcii, kde sa stretlo vyše tristo ľudí. Veronika bola vo firme len pár dní – a hneď sa ocitla uprostred celofiremnej oslavy.',
-          'Marek si ju všimol takmer okamžite. V celom tom dave mal oči len pre ňu – a od toho večera na ňu neprestal myslieť.',
-        ],
-        image: {
-          src: 'images/story-1.svg',
-          alt: 'Marek a Veronika na firemnej akcii, kde sa spoznali',
-          width: 1200,
-          height: 1500,
-        },
-      },
-      {
-        eyebrow: '2020 – 2026',
-        title: 'Spoločná cesta',
-        paragraphs: [
-          'Nasledovali dlhé prechádzky po Malých Karpatoch, nedeľné raňajky, prvý spoločný byt a pes Bruno, ktorý si nás oboch okamžite omotal okolo labky.',
-          'Precestovali sme kus sveta, no najradšej sa vždy vraciame domov – k sebe.',
-        ],
-        image: {
-          src: 'images/story-2.svg',
-          alt: 'Marek a Veronika na turistike v Malých Karpatoch',
-          width: 1200,
-          height: 1500,
-        },
-      },
-      {
-        eyebrow: 'Leto 2026',
-        title: 'Žiadosť o ruku',
-        paragraphs: [
-          'Na mieste, kde sme sa prvýkrát pobozkali, pri západe slnka nad vinohradmi, si Marek kľakol na jedno koleno.',
-          'Veronika povedala „áno“ skôr, než stihol dokončiť otázku. A teraz by sme radi, aby ste ten najkrajší deň oslávili s nami.',
-        ],
-        image: {
-          src: 'images/zasnuby.webp',
-          alt: 'Marek a Veronika tesne po zásnubách – Veronika si od dojatia zakrýva ústa rukou so zásnubným prsteňom',
-          width: 683,
-          height: 911,
-          focus: '50% 30%',
-        },
-      },
-    ],
-    timelineTitle: 'Naše míľniky',
-    timeline: [
-      { date: 'Október 2019', title: 'Prvé stretnutie', description: 'Firemná akcia pre vyše 300 ľudí' },
-      { date: 'Máj 2020', title: 'Prvé rande', description: 'Piknik v Malých Karpatoch' },
-      { date: 'September 2022', title: 'Spoločný domov', description: 'Prvý byt a prvé vlastné kvety' },
-      { date: 'Marec 2024', title: 'Prišiel Bruno', description: 'Najlepší pes na svete' },
-      { date: 'August 2026', title: 'Zásnuby', description: 'Pri západe slnka vo vinohrade' },
-      { date: 'Apríl 2027', title: 'Svadba', description: 'A príbeh pokračuje…' },
-    ],
+    eyebrow: 'O nás',
+    title: 'Povedali sme áno',
+    text: 'Spoznali sme sa na jeseň 2019 na firemnej akcii plnej ľudí – a v tom dave sme si našli práve jeden druhého. V lete 2026 prišla žiadosť o ruku a Veronika povedala „áno“ skôr, než Marek stihol dokončiť otázku. Teraz by sme radi, aby ste ten najkrajší deň oslávili s nami.',
+    image: {
+      src: 'images/zasnuby.webp',
+      alt: 'Marek a Veronika tesne po zásnubách – Veronika si od dojatia zakrýva ústa rukou so zásnubným prsteňom',
+      width: 683,
+      height: 911,
+      focus: '50% 30%',
+    },
   },
 
   details: {
     eyebrow: 'Kedy a kde?',
     title: 'Svadobný deň',
-    intro: 'Obrad aj oslava sa uskutočnia na jednom mieste – v Bašte Pajštún v Borinke, v lone Malých Karpát.',
-    ceremony: {
-      label: 'Svadobný obrad',
+    intro: 'Obrad aj oslava sa uskutočnia na jednom mieste – v Bašte Pajštún v Borinke.',
+    venue: {
+      label: 'Obrad a hostina',
       name: 'Bašta Pajštún',
-      time: '15:00',
+      times: [
+        { label: 'Svadobný obrad', time: '15:00' },
+        { label: 'Svadobná hostina', time: '17:00' },
+      ],
       address: '900 32 Borinka · GPS 48.27419, 17.070555',
       mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=48.27419,17.070555',
       description:
-        'Svadobný obrad sa uskutoční v areáli Bašty Pajštún. V prípade nepriaznivého počasia sa presunieme dovnútra.',
+        'Obrad sa uskutoční v areáli Bašty Pajštún (v prípade nepriaznivého počasia vo vnútri). Hneď potom nasleduje slávnostná večera, tanec a zábava až do skorých ranných hodín – bez presunov, na tom istom mieste.',
       image: {
         src: 'images/ceremony.svg',
-        alt: 'Miesto svadobného obradu v Bašte Pajštún',
-        width: 1400,
-        height: 1000,
-      },
-    },
-    reception: {
-      label: 'Svadobná hostina',
-      name: 'Bašta Pajštún',
-      time: '17:00',
-      address: '900 32 Borinka · GPS 48.27419, 17.070555',
-      mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=48.27419,17.070555',
-      description: 'Slávnostná večera, tanec a zábava až do skorých ranných hodín – bez presunov, na tom istom mieste.',
-      image: {
-        src: 'images/reception.svg',
-        alt: 'Priestory svadobnej hostiny v Bašte Pajštún',
+        alt: 'Bašta Pajštún – miesto obradu aj hostiny',
         width: 1400,
         height: 1000,
       },
@@ -186,7 +126,7 @@ export const wedding: WeddingConfig = {
     },
     map: {
       enabled: true,
-      title: 'Kde nás nájdete',
+      title: 'Ako sa dostanem na svadobnú hostinu',
       description: 'Baštu Pajštún nájdete nad obcou Borinka, neďaleko hradu Pajštún.',
       lat: 48.27419,
       lng: 17.070555,
@@ -297,33 +237,7 @@ export const wedding: WeddingConfig = {
     intro: 'Praktické rady, aby ste si náš deň mohli užiť naplno a bez starostí.',
     accommodation: {
       title: 'Ubytovanie',
-      intro:
-        'Pre hostí, ktorí prichádzajú z diaľky, sme predbežne rezervovali izby. Pri rezervácii uveďte heslo „Svadba M&V“.',
-      places: [
-        {
-          name: 'Penzión v Borinke',
-          address: '900 32 Borinka',
-          distance: 'pár minút od Bašty',
-          description: 'Ubytovanie priamo v obci – ideálne, ak si chcete po polnoci len prejsť do postele.',
-          bookingUrl: 'https://www.booking.com/',
-          phone: '+421 900 123 456',
-        },
-        {
-          name: 'Hotel v Stupave',
-          address: '900 31 Stupava',
-          distance: '10 min autom',
-          description: 'Hotel s raňajkami v neďalekej Stupave.',
-          bookingUrl: 'https://www.booking.com/',
-        },
-        {
-          name: 'Apartmány Marianka',
-          address: '900 33 Marianka',
-          distance: '15 min autom',
-          description: 'Apartmány v pokojnom prostredí – vhodné pre rodiny s deťmi.',
-          bookingUrl: 'https://www.booking.com/',
-        },
-      ],
-      note: 'Izby sú pre vás držané do 15. marca 2027. Potom ich hotel uvoľní do bežného predaja.',
+      text: 'Ubytovanie bude len na mieste – prespíme priamo v priestoroch Bašty Pajštún. Po oslave sa tak už nemusíte nikam presúvať.',
     },
     cards: [
       {
@@ -339,7 +253,7 @@ export const wedding: WeddingConfig = {
         title: 'Doprava',
         paragraphs: [
           'Obrad aj hostina sú na jednom mieste, takže sa počas dňa nikam nepresúvame.',
-          'Po polnoci budú pre hostí ubytovaných v okolí pripravené odvozy – stačí sa ozvať svedkom.',
+          'Ubytovanie bude len na mieste – v priestoroch Bašty, takže po oslave už nikam necestujete.',
         ],
       },
       {
@@ -363,22 +277,10 @@ export const wedding: WeddingConfig = {
     dressCode: {
       title: 'Dress code',
       description:
-        'Elegantne a jarne. Pánom odporúčame oblek (kravata nie je povinná), dámam šaty v jemných pastelových či zemitých tónoch. Koncom apríla býva večer chladnejšie – pribaľte si šál alebo sako.',
-      palette: [
-        { name: 'Šampanská', hex: '#E8D9BF' },
-        { name: 'Šalviová', hex: '#A3AF94' },
-        { name: 'Púdrová', hex: '#E5CFC3' },
-        { name: 'Piesková', hex: '#D4BFA0' },
-        { name: 'Olivová', hex: '#6F7A5B' },
-      ],
+        'Elegantne a slávnostne – oblečte sa tak, aby ste sa cítili dobre a mohli tancovať až do rána. Koncom apríla býva večer chladnejšie, pribaľte si niečo teplé.',
     },
     faqTitle: 'Časté otázky',
     faq: [
-      {
-        question: 'Môžem prísť so sprievodom?',
-        answer:
-          'Ak je vo vašom pozvaní uvedené „s partnerom/partnerkou“, určite áno. Počet osôb, prosím, uveďte vo formulári na potvrdenie účasti.',
-      },
       {
         question: 'Do kedy mám potvrdiť účasť?',
         answer: 'Najneskôr do 31. marca 2027. Pomôže nám to s finálnym počtom hostí a menu.',
@@ -394,7 +296,7 @@ export const wedding: WeddingConfig = {
       },
       {
         question: 'Bude na mieste možnosť prespať?',
-        answer: 'Áno, v okolí sme rezervovali niekoľko ubytovaní – pozrite si časť Ubytovanie vyššie.',
+        answer: 'Áno – ubytovanie bude len na mieste, priamo v priestoroch Bašty Pajštún.',
       },
     ],
     contactsTitle: 'Kontakty',
@@ -415,17 +317,14 @@ export const wedding: WeddingConfig = {
       {
         icon: 'plane',
         title: 'Príspevok na svadobnú cestu',
-        description: 'Snívame o Japonsku – o čajových záhradách, horách a dobrom jedle.',
       },
       {
         icon: 'gift',
         title: 'Finančný dar',
-        description: 'Diskrétne v obálke – na svadbe pre ňu bude pripravená krabička.',
       },
       {
         icon: 'flower',
         title: 'Kvety netreba',
-        description: 'Namiesto kytice nás poteší vaše milé slovo alebo kniha s venovaním.',
       },
     ],
     signature: 'S láskou, Marek & Veronika',

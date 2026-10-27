@@ -26,7 +26,6 @@ export function Gifts() {
                 <Icon name={option.icon} size={22} />
               </span>
               <h3 className="mt-6 text-2xl text-ink">{option.title}</h3>
-              <p className="mt-3 text-sm text-ink-soft">{option.description}</p>
             </Reveal>
           ))}
         </ul>

@@ -3,9 +3,8 @@
  * Vďaka nim TypeScript upozorní na chýbajúce alebo zle zadané údaje.
  */
 
-/** Identifikátory sekcií – používajú sa ako HTML kotvy (#nas-pribeh …). */
-export type SectionId =
-  'uvod' | 'nas-pribeh' | 'svadba' | 'harmonogram' | 'fotogaleria' | 'informacie' | 'dary' | 'rsvp';
+/** Identifikátory sekcií – používajú sa ako HTML kotvy (#o-nas …). */
+export type SectionId = 'uvod' | 'o-nas' | 'svadba' | 'harmonogram' | 'fotogaleria' | 'informacie' | 'dary' | 'rsvp';
 
 /** Názvy ikon, ktoré je možné použiť v konfigurácii (mapované na Lucide ikony). */
 export type IconName =
@@ -47,30 +46,16 @@ export interface ImageAsset {
 }
 
 export interface Venue {
-  /** Krátky nadpis karty, napr. „Svadobný obrad“. */
+  /** Krátky nadpis karty, napr. „Obrad a hostina“. */
   label: string;
   name: string;
-  /** Čas začiatku vo formáte HH:MM (miestny čas svadby). */
-  time: string;
+  /** Časy programu vo formáte HH:MM (miestny čas svadby), napr. obrad a hostina. */
+  times: { label: string; time: string }[];
   address: string;
   description?: string;
   /** Vlastný odkaz na Google Maps. Ak chýba, vytvorí sa automaticky z adresy. */
   mapsUrl?: string;
   image?: ImageAsset;
-}
-
-export interface StoryChapter {
-  /** Malý nadpis nad kapitolou, napr. rok alebo „Prvé stretnutie“. */
-  eyebrow: string;
-  title: string;
-  paragraphs: string[];
-  image: ImageAsset;
-}
-
-export interface Milestone {
-  date: string;
-  title: string;
-  description?: string;
 }
 
 export interface ScheduleItem {
@@ -83,15 +68,6 @@ export interface ScheduleItem {
 
 export interface GalleryImage extends ImageAsset {
   caption?: string;
-}
-
-export interface Accommodation {
-  name: string;
-  address: string;
-  description?: string;
-  distance?: string;
-  bookingUrl?: string;
-  phone?: string;
 }
 
 export interface InfoCard {
@@ -115,7 +91,6 @@ export interface Contact {
 export interface GiftOption {
   icon: IconName;
   title: string;
-  description: string;
 }
 
 export interface SectionHeading {
@@ -158,7 +133,6 @@ export interface WeddingConfig {
   /** Ktoré voliteľné sekcie sa majú zobraziť. */
   sections: {
     story: boolean;
-    storyTimeline: boolean;
     schedule: boolean;
     gallery: boolean;
     info: boolean;
@@ -194,15 +168,17 @@ export interface WeddingConfig {
     afterMessage: string;
   };
 
-  story: SectionHeading & {
-    chapters: StoryChapter[];
-    timelineTitle: string;
-    timeline: Milestone[];
+  /** Krátky blok „O nás“ – jedna fotka a pár viet. */
+  story: {
+    eyebrow: string;
+    title: string;
+    text: string;
+    image: ImageAsset;
   };
 
   details: SectionHeading & {
-    ceremony: Venue;
-    reception: Venue;
+    /** Miesto obradu aj hostiny. */
+    venue: Venue;
     calendar: {
       title: string;
       /** Názov udalosti v kalendári hosťa, napr. „Svadba Michaely a Martina“. */
@@ -247,15 +223,12 @@ export interface WeddingConfig {
   info: SectionHeading & {
     accommodation: {
       title: string;
-      intro: string;
-      places: Accommodation[];
-      note?: string;
+      text: string;
     };
     cards: InfoCard[];
     dressCode: {
       title: string;
       description: string;
-      palette: { name: string; hex: string }[];
     };
     faqTitle: string;
     faq: FaqItem[];

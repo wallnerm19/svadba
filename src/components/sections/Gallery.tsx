@@ -11,7 +11,7 @@ export function Gallery() {
   const [index, setIndex] = useState<number | null>(null);
 
   return (
-    <section id="fotogaleria" aria-labelledby="fotogaleria-title" className="theme-sage bg-cream py-24 sm:py-36">
+    <section id="fotogaleria" aria-labelledby="fotogaleria-title" className="theme-sage paper py-24 sm:py-36">
       <div className="container-page">
         <SectionHeading id="fotogaleria-title" eyebrow={gallery.eyebrow} title={gallery.title} intro={gallery.intro} />
 

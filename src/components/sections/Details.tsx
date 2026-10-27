@@ -10,48 +10,37 @@ import { Picture } from '../ui/Picture';
 import { Reveal } from '../ui/Reveal';
 import { SectionHeading } from '../ui/SectionHeading';
 
-function VenueCard({ venue, delay }: { venue: Venue; delay: number }) {
+/** Obrad aj hostina sú na jednom mieste, preto ich ukazujeme v jednom spoločnom bloku. */
+function VenueCard({ venue }: { venue: Venue }) {
   return (
-    <Reveal as="article" delay={delay} className="group flex flex-col overflow-hidden bg-ivory shadow-soft">
+    <Reveal as="article" className="group grid overflow-hidden bg-ivory shadow-soft lg:grid-cols-2">
       {venue.image && (
         <Picture
           image={venue.image}
-          className="aspect-[16/10]"
+          className="aspect-[16/10] lg:aspect-auto lg:h-full"
           imgClassName="transition-transform duration-[1.6s] ease-elegant group-hover:scale-[1.04]"
         />
       )}
-      <div className="flex flex-1 flex-col items-center px-7 pt-10 pb-10 text-center sm:px-10">
+      <div className="flex flex-col items-center justify-center px-7 py-12 text-center sm:px-12">
         <p className="eyebrow">{venue.label}</p>
         <h3 className="mt-4 text-3xl leading-tight text-ink sm:text-4xl">{venue.name}</h3>
         <Ornament className="mt-6" />
-        <dl className="mt-6 space-y-3 text-ink-soft">
-          <div className="flex items-center justify-center gap-2.5">
-            <dt>
-              <Clock size={16} strokeWidth={1.5} className="text-gold" aria-label="Čas" />
-            </dt>
-            <dd className="font-serif text-2xl text-ink">{venue.time}</dd>
-          </div>
-          <div className="flex items-start justify-center gap-2.5">
-            <dt className="pt-1">
-              <MapPin size={16} strokeWidth={1.5} className="text-gold" aria-label="Adresa" />
-            </dt>
-            <dd>
-              <address className="not-italic">{venue.address}</address>
-            </dd>
-          </div>
+        <dl className="mt-6 flex flex-wrap justify-center gap-x-10 gap-y-4">
+          {venue.times.map((t) => (
+            <div key={t.label} className="flex flex-col items-center gap-1">
+              <dt className="eyebrow !tracking-[0.18em]">{t.label}</dt>
+              <dd className="flex items-center gap-2 font-serif text-2xl text-ink">
+                <Clock size={16} strokeWidth={1.5} className="text-gold" aria-hidden="true" />
+                {t.time}
+              </dd>
+            </div>
+          ))}
         </dl>
-        {venue.description && <p className="mt-5 max-w-sm text-sm text-ink-soft">{venue.description}</p>}
-        <div className="mt-auto pt-8">
-          <ButtonLink
-            href={mapsUrl(venue)}
-            external
-            variant="outline"
-            aria-label={`Navigovať: ${venue.name} (Google Maps)`}
-          >
-            <Navigation size={15} strokeWidth={1.5} aria-hidden="true" />
-            Navigovať
-          </ButtonLink>
-        </div>
+        <address className="mt-6 flex items-start justify-center gap-2.5 text-ink-soft not-italic">
+          <MapPin size={16} strokeWidth={1.5} className="mt-1 shrink-0 text-gold" aria-hidden="true" />
+          {venue.address}
+        </address>
+        {venue.description && <p className="mt-5 max-w-md text-sm text-ink-soft">{venue.description}</p>}
       </div>
     </Reveal>
   );
@@ -59,7 +48,7 @@ function VenueCard({ venue, delay }: { venue: Venue; delay: number }) {
 
 /** Mapa miesta svadby – Google Maps vložené bez API kľúča, načíta sa až pri priblížení k sekcii. */
 function VenueMap() {
-  const { map, ceremony } = wedding.details;
+  const { map, venue } = wedding.details;
   const coords = `${map.lat},${map.lng}`;
   // Priama adresa na vloženie (staršie „?output=embed“ presmeruje s hlavičkou, ktorá vloženie zakazuje).
   const embedUrl = `https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1s${coords}!6i${map.zoom}!3m1!1ssk!5m1!1ssk`;
@@ -71,7 +60,7 @@ function VenueMap() {
         <div className="relative aspect-[4/3] bg-champagne sm:aspect-[16/9] lg:aspect-auto lg:min-h-[26rem]">
           <iframe
             src={embedUrl}
-            title={`Mapa – ${ceremony.name}`}
+            title={`Mapa – ${venue.name}`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
@@ -80,7 +69,7 @@ function VenueMap() {
           />
         </div>
         <div className="flex flex-col justify-center gap-5 px-7 py-10 text-center sm:px-10 lg:text-left">
-          <p className="eyebrow">{ceremony.name}</p>
+          <p className="eyebrow">{venue.name}</p>
           <h3 className="text-3xl leading-tight text-ink sm:text-4xl">{map.title}</h3>
           {map.description && <p className="text-ink-soft">{map.description}</p>}
           <p className="flex items-center justify-center gap-2 text-sm text-ink-soft lg:justify-start">
@@ -93,7 +82,7 @@ function VenueMap() {
             </span>
           </p>
           <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-center lg:flex-col">
-            <ButtonLink href={mapsUrl(ceremony)} external variant="primary">
+            <ButtonLink href={mapsUrl(venue)} external variant="primary">
               <Navigation size={15} strokeWidth={1.5} aria-hidden="true" />
               Navigovať
             </ButtonLink>
@@ -114,19 +103,17 @@ export function Details() {
       <div className="container-page">
         <SectionHeading id="svadba-title" eyebrow={details.eyebrow} title={details.title} intro={details.intro} />
 
-        <Reveal className="mx-auto -mt-6 mb-16 flex max-w-xl flex-col items-center text-center sm:mb-20">
-          <p className="font-serif text-3xl text-ink capitalize sm:text-4xl">{weekday}</p>
-          <p className="mt-1 font-serif text-5xl text-gold-deep italic sm:text-6xl">{longDate}</p>
+        <Reveal className="-mt-6 mb-16 text-center sm:mb-20">
+          <p className="font-serif text-4xl text-gold-deep italic sm:text-6xl">
+            <span className="capitalize">{weekday}</span> {longDate}
+          </p>
         </Reveal>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:gap-12">
-          <VenueCard venue={details.ceremony} delay={0} />
-          <VenueCard venue={details.reception} delay={0.12} />
-        </div>
+        <VenueCard venue={details.venue} />
 
         {details.map.enabled && <VenueMap />}
 
-        <Reveal className="mx-auto mt-20 max-w-2xl border border-line bg-ivory/60 px-6 py-12 text-center sm:px-12">
+        <Reveal className="mt-20 border border-line bg-ivory/60 px-6 py-12 text-center sm:px-12">
           <h3 className="text-3xl text-ink sm:text-4xl">{details.calendar.title}</h3>
           <p className="mt-3 text-ink-soft">{details.calendar.description}</p>
           <div className="mt-8">

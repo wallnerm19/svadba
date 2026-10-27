@@ -20,7 +20,7 @@ export const shortDate = formatShortDate(weddingStart, wedding.date.timeZone);
 export const calendarEvent: CalendarEvent = {
   title: wedding.details.calendar.eventTitle,
   description: wedding.details.calendar.eventDescription,
-  location: `${wedding.details.ceremony.name}, ${wedding.details.ceremony.address}`,
+  location: `${wedding.details.venue.name}, ${wedding.details.venue.address}`,
   start: weddingStart,
   end: weddingEnd,
   timeZone: wedding.date.timeZone,
@@ -30,7 +30,7 @@ export const calendarEvent: CalendarEvent = {
 /** Je sekcia zapnutá v konfigurácii? (Úvod, Svadba a záver sú vždy viditeľné.) */
 export function isSectionVisible(id: string): boolean {
   const map: Record<string, boolean> = {
-    'nas-pribeh': wedding.sections.story,
+    'o-nas': wedding.sections.story,
     harmonogram: wedding.sections.schedule,
     fotogaleria: wedding.sections.gallery,
     informacie: wedding.sections.info,

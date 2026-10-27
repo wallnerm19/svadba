@@ -2,13 +2,12 @@ import { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'motion/react';
 import { wedding } from '../../config/wedding';
 import { asset } from '../../lib/links';
-import { firstName, isSectionVisible, longDate, secondName, weekday } from '../../lib/wedding';
+import { firstName, longDate, secondName, weekday } from '../../lib/wedding';
 import { Countdown } from '../Countdown';
 import { ButtonLink } from '../ui/Button';
 import { useIntroReady } from '../../hooks/useIntro';
 
 const ease = [0.22, 1, 0.36, 1] as const;
-const nextSection = isSectionVisible('nas-pribeh') ? 'nas-pribeh' : 'svadba';
 
 function AnimatedName({ text, delay }: { text: string; delay: number }) {
   const reduce = useReducedMotion();
@@ -130,19 +129,6 @@ export function Hero() {
           </motion.div>
         )}
       </motion.div>
-
-      <motion.a
-        href={`#${nextSection}`}
-        className="absolute bottom-6 left-1/2 flex -translate-x-1/2 flex-col items-center gap-3 text-[0.6rem] uppercase tracking-[0.3em] text-ivory/75 transition-colors hover:text-ivory"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: ready ? 1 : 0 }}
-        transition={{ delay: 2.4, duration: 1 }}
-      >
-        <span>Posuňte nižšie</span>
-        <span aria-hidden="true" className="relative h-12 w-px overflow-hidden bg-ivory/25">
-          <span className="absolute inset-x-0 top-0 h-1/2 bg-ivory motion-safe:animate-[scroll-cue_2.2s_cubic-bezier(0.65,0,0.35,1)_infinite]" />
-        </span>
-      </motion.a>
     </section>
   );
 }

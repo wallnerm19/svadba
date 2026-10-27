@@ -49,8 +49,8 @@ export default function App() {
             {sections.story && <Story />}
             <Details />
             {sections.schedule && <Schedule />}
-            {sections.gallery && <Gallery />}
             {sections.info && <Info />}
+            {sections.gallery && <Gallery />}
             {sections.gifts && <Gifts />}
             {sections.rsvp && <Rsvp />}
             <Closing />

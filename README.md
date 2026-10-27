@@ -84,9 +84,9 @@ date: {
 
 Časy sa zadávajú v **miestnom čase svadby**. Odpočet aj kalendár ich správne prepočítajú pre hostí v ľubovoľnom časovom pásme (vrátane letného času). Po začiatku svadby sa odpočet automaticky nahradí textom z `countdown.afterTitle` a `countdown.afterMessage`.
 
-### Miesta obradu a hostiny
+### Miesto obradu a hostiny
 
-V `details.ceremony` a `details.reception` zmeňte `name`, `time`, `address` a `description`. Tlačidlo **Navigovať** automaticky otvorí Google Maps s navigáciou na zadanú adresu. Ak chcete presný bod (napr. konkrétny vchod), vložte vlastný odkaz do `mapsUrl`:
+Obrad aj hostina sú v jednom bloku `details.venue` – zmeňte `name`, `times` (napr. obrad a hostina), `address` a `description`. Tlačidlo **Navigovať** pri mape automaticky otvorí Google Maps s navigáciou na zadanú adresu. Ak chcete presný bod (napr. konkrétny vchod), vložte vlastný odkaz do `mapsUrl`:
 
 1. Otvorte miesto v [Google Maps](https://maps.google.com) → **Zdieľať** → **Kopírovať odkaz**.
 2. Vložte ho: `mapsUrl: 'https://maps.app.goo.gl/…'`.
@@ -99,7 +99,7 @@ Pole `schedule.items` – každá položka má `time`, `title`, voliteľný `des
 
 Momentálne sú na stránke **ilustračné obrázky** (`public/images/*.svg`). Nahradenie vlastnými fotkami:
 
-1. Skopírujte fotografie do `public/images/` (napr. `hero.jpg`, `story-1.jpg`, `gallery-01.jpg`…).
+1. Skopírujte fotografie do `public/images/` (napr. `hero.jpg`, `zasnuby.jpg`, `gallery-01.jpg`…).
 2. V `wedding.ts` zmeňte `src` (napr. `'images/hero.jpg'`), `alt` (popis fotky) a `width` / `height` (skutočné rozmery v pixeloch).
 3. Voliteľne `focus: '50% 30%'` určí, ktorá časť fotky zostane viditeľná pri orezaní (napr. tváre).
 

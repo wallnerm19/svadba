@@ -154,15 +154,6 @@
   }
 }
 
-@keyframes scroll-cue {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(200%);
-  }
-}
-
 @keyframes envelope-pulse {
   0% {
     transform: scale(1);

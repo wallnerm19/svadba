@@ -62,5 +62,12 @@ export default defineConfig({
   build: {
     target: 'es2020',
     assetsInlineLimit: 0,
+    rollupOptions: {
+      input: {
+        main: resolve(import.meta.dirname, 'index.html'),
+        // Interný plánovač sedenia – /svadba/sedenie/ (nikde naň nevedie odkaz).
+        sedenie: resolve(import.meta.dirname, 'sedenie/index.html'),
+      },
+    },
   },
 });

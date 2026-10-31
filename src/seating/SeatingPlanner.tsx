@@ -1,30 +1,77 @@
 import { useEffect, useMemo, useRef, useState, type DragEvent, type ReactNode } from 'react';
-import { Circle, Download, Minus, Plus, Printer, RectangleHorizontal, Search, Trash2, Upload, X } from 'lucide-react';
 import {
+  Circle,
+  Download,
+  LayoutGrid,
+  Map as MapIcon,
+  Minus,
+  Plus,
+  Printer,
+  RectangleHorizontal,
+  RotateCw,
+  Search,
+  Trash2,
+  Upload,
+  X,
+} from 'lucide-react';
+import FloorPlan from './FloorPlan';
+import {
+  AGES,
+  DIETS,
   NO_GROUP_COLOR,
   PALETTE,
+  freeSpot,
   parsePlan,
   uid,
   usePlan,
+  type Age,
+  type Diet,
   type Group,
   type Guest,
   type Plan,
+  type Room,
+  type RoomItem,
   type Table,
 } from './store';
+import { DIET_ICONS, DRAG_TYPE, GuestBadges, IconButton, Panel, ToolButton, ageShort, dietLabel } from './ui';
 
 const collator = new Intl.Collator('sk');
-const DRAG_TYPE = 'text/plain';
 
-/** Ktoré hostí zvýrazniť – podľa skupiny a/alebo hľadaného mena. */
+/** Ktorých hostí zvýrazniť – podľa skupiny, veku, stravy a/alebo hľadaného mena. */
 interface Highlight {
   groupId: string | null | undefined; // undefined = všetky skupiny, null = bez skupiny
+  age: Age | undefined;
+  diet: Diet | 'any' | undefined; // 'any' = akékoľvek obmedzenie
   query: string;
+}
+
+const NO_HIGHLIGHT: Highlight = { groupId: undefined, age: undefined, diet: undefined, query: '' };
+
+type View = 'list' | 'floor';
+const VIEW_KEY = 'svadba:sedenie:pohlad';
+
+function loadView(): View {
+  try {
+    return localStorage.getItem(VIEW_KEY) === 'floor' ? 'floor' : 'list';
+  } catch {
+    return 'list';
+  }
 }
 
 export default function SeatingPlanner() {
   const [plan, setPlan] = usePlan();
-  const [highlight, setHighlight] = useState<Highlight>({ groupId: undefined, query: '' });
+  const [highlight, setHighlight] = useState<Highlight>(NO_HIGHLIGHT);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [view, setView] = useState<View>(loadView);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(VIEW_KEY, view);
+    } catch {
+      /* nevadí */
+    }
+  }, [view]);
 
   const groupIndex = useMemo(() => new Map(plan.groups.map((g, i) => [g.id, i])), [plan.groups]);
   const groupById = useMemo(() => new Map(plan.groups.map((g) => [g.id, g])), [plan.groups]);
@@ -47,13 +94,18 @@ export default function SeatingPlanner() {
     return map;
   }, [plan.guests]);
 
+  const guestsAt = (tableId: string) => sortGuests(byTable.get(tableId) ?? []);
   const unseated = sortGuests(byTable.get(null) ?? []);
   const totalSeats = plan.tables.reduce((sum, t) => sum + t.seats, 0);
   const seatedCount = plan.guests.length - unseated.length;
 
   const isDimmed = (guest: Guest) => {
-    if (highlight.groupId !== undefined && guest.groupId !== highlight.groupId) return true;
-    const q = normalize(highlight.query.trim());
+    const h = highlight;
+    if (h.groupId !== undefined && guest.groupId !== h.groupId) return true;
+    if (h.age && guest.age !== h.age) return true;
+    if (h.diet === 'any' && !guest.diet.length) return true;
+    if (h.diet && h.diet !== 'any' && !guest.diet.includes(h.diet)) return true;
+    const q = normalize(h.query.trim());
     return q !== '' && !normalize(guest.name).includes(q);
   };
 
@@ -66,10 +118,13 @@ export default function SeatingPlanner() {
 
   const moveGuest = (id: string, tableId: string | null) => updateGuest(id, { tableId });
 
-  const addGuests = (names: string[], groupId: string | null) =>
+  const addGuests = (names: string[], groupId: string | null, age: Age) =>
     setPlan((p) => ({
       ...p,
-      guests: [...p.guests, ...names.map((name) => ({ id: uid(), name, groupId, tableId: null, note: '' }))],
+      guests: [
+        ...p.guests,
+        ...names.map((name) => ({ id: uid(), name, groupId, tableId: null, age, diet: [], note: '' })),
+      ],
     }));
 
   const removeGuest = (id: string) => setPlan((p) => ({ ...p, guests: p.guests.filter((g) => g.id !== id) }));
@@ -77,11 +132,24 @@ export default function SeatingPlanner() {
   const updateTable = (id: string, patch: Partial<Table>) =>
     setPlan((p) => ({ ...p, tables: p.tables.map((t) => (t.id === id ? { ...t, ...patch } : t)) }));
 
-  const addTable = () =>
+  const addTable = () => {
+    const id = uid();
     setPlan((p) => ({
       ...p,
-      tables: [...p.tables, { id: uid(), name: `Stôl ${p.tables.length + 1}`, seats: 8, shape: 'round' }],
+      tables: [
+        ...p.tables,
+        {
+          id,
+          name: `Stôl ${p.tables.length + 1}`,
+          seats: 8,
+          shape: 'round',
+          rotation: 0,
+          ...freeSpot(p.room, [...p.tables, ...p.room.items]),
+        },
+      ],
     }));
+    if (view === 'floor') setSelectedId(id);
+  };
 
   const removeTable = (table: Table) => {
     const count = byTable.get(table.id)?.length ?? 0;
@@ -91,6 +159,19 @@ export default function SeatingPlanner() {
       tables: p.tables.filter((t) => t.id !== table.id),
       guests: p.guests.map((g) => (g.tableId === table.id ? { ...g, tableId: null } : g)),
     }));
+  };
+
+  const updateRoom = (patch: Partial<Room>) => setPlan((p) => ({ ...p, room: { ...p.room, ...patch } }));
+
+  const updateItem = (id: string, patch: Partial<RoomItem>) =>
+    updateRoom({ items: plan.room.items.map((i) => (i.id === id ? { ...i, ...patch } : i)) });
+
+  const addItem = (kind: RoomItem['kind']) => {
+    const id = uid();
+    updateRoom({
+      items: [...plan.room.items, { id, kind, x: plan.room.width / 2, y: plan.room.height / 2, rotation: 0 }],
+    });
+    setSelectedId(id);
   };
 
   const updateGroup = (id: string, patch: Partial<Group>) =>
@@ -120,6 +201,21 @@ export default function SeatingPlanner() {
       color={colorOf(guest)}
       dimmed={isDimmed(guest)}
       onEdit={() => setEditingId(guest.id)}
+    />
+  );
+
+  const tableCard = (table: Table) => (
+    <TableCard
+      key={table.id}
+      table={table}
+      guests={guestsAt(table.id)}
+      unseated={unseated}
+      colorOf={colorOf}
+      isDimmed={isDimmed}
+      renderChip={guestChip}
+      onChange={(patch) => updateTable(table.id, patch)}
+      onRemove={() => removeTable(table)}
+      onSeat={(guestId) => moveGuest(guestId, table.id)}
     />
   );
 
@@ -173,36 +269,58 @@ export default function SeatingPlanner() {
               </Panel>
             )}
           </DropZone>
+
+          <Panel title="Prehľad">
+            <Overview guests={plan.guests} highlight={highlight} onChange={setHighlight} />
+          </Panel>
         </aside>
 
         <section aria-label="Stoly" className="min-w-0">
+          <div className="mb-5 flex flex-wrap gap-2 print:hidden">
+            <ToolButton icon={<LayoutGrid size={16} />} active={view === 'list'} onClick={() => setView('list')}>
+              Stoly
+            </ToolButton>
+            <ToolButton icon={<MapIcon size={16} />} active={view === 'floor'} onClick={() => setView('floor')}>
+              Rozloženie sály
+            </ToolButton>
+          </div>
+
           <Toolbar groups={plan.groups} highlight={highlight} onChange={setHighlight} />
 
-          <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 2xl:grid-cols-3 print:mt-0 print:grid-cols-2 print:gap-3">
-            {plan.tables.map((table) => (
-              <TableCard
-                key={table.id}
-                table={table}
-                guests={sortGuests(byTable.get(table.id) ?? [])}
-                unseated={unseated}
+          {view === 'list' ? (
+            <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 2xl:grid-cols-3 print:mt-0 print:grid-cols-2 print:gap-3">
+              {plan.tables.map(tableCard)}
+
+              <button
+                type="button"
+                onClick={addTable}
+                className="flex min-h-56 flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-line text-ink-soft transition-colors hover:border-sage hover:bg-ivory/60 hover:text-ink print:hidden"
+              >
+                <Plus size={28} strokeWidth={1.5} />
+                <span className="text-sm font-semibold uppercase tracking-[0.18em]">Pridať stôl</span>
+              </button>
+            </div>
+          ) : (
+            <div className="mt-5">
+              <FloorPlan
+                room={plan.room}
+                tables={plan.tables}
+                guestsAt={guestsAt}
                 colorOf={colorOf}
                 isDimmed={isDimmed}
-                renderChip={guestChip}
-                onChange={(patch) => updateTable(table.id, patch)}
-                onRemove={() => removeTable(table)}
-                onSeat={(guestId) => moveGuest(guestId, table.id)}
+                selectedId={selectedId}
+                onSelect={setSelectedId}
+                onMoveTable={(id, x, y) => updateTable(id, { x, y })}
+                onSeat={moveGuest}
+                onAddTable={addTable}
+                onRoomChange={updateRoom}
+                onAddItem={addItem}
+                onUpdateItem={updateItem}
+                onRemoveItem={(id) => updateRoom({ items: plan.room.items.filter((i) => i.id !== id) })}
+                renderTableCard={tableCard}
               />
-            ))}
-
-            <button
-              type="button"
-              onClick={addTable}
-              className="flex min-h-56 flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-line text-ink-soft transition-colors hover:border-sage hover:bg-ivory/60 hover:text-ink print:hidden"
-            >
-              <Plus size={28} strokeWidth={1.5} />
-              <span className="text-sm font-semibold uppercase tracking-[0.18em]">Pridať stôl</span>
-            </button>
-          </div>
+            </div>
+          )}
         </section>
       </main>
 
@@ -325,67 +443,6 @@ function Header({
   );
 }
 
-function ToolButton({ icon, onClick, children }: { icon: ReactNode; onClick: () => void; children: ReactNode }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-ivory px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-ink transition-colors hover:border-sage hover:bg-champagne/50"
-    >
-      {icon}
-      {children}
-    </button>
-  );
-}
-
-function IconButton({
-  label,
-  icon,
-  onClick,
-  className = '',
-}: {
-  label: string;
-  icon: ReactNode;
-  onClick: () => void;
-  className?: string;
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      title={label}
-      onClick={onClick}
-      className={`inline-flex size-8 shrink-0 items-center justify-center rounded-full text-ink-soft transition-colors hover:bg-champagne/60 hover:text-ink ${className}`}
-    >
-      {icon}
-    </button>
-  );
-}
-
-function Panel({
-  title,
-  action,
-  highlighted = false,
-  children,
-}: {
-  title: string;
-  action?: ReactNode;
-  highlighted?: boolean;
-  children: ReactNode;
-}) {
-  return (
-    <section
-      className={`rounded-2xl border bg-ivory p-5 shadow-soft transition-colors ${highlighted ? 'border-sage bg-sage-light' : 'border-line'}`}
-    >
-      <div className="mb-3 flex items-center justify-between gap-2">
-        <h2 className="text-2xl text-ink">{title}</h2>
-        {action}
-      </div>
-      {children}
-    </section>
-  );
-}
-
 // --- Skupiny ----------------------------------------------------------------
 
 function GroupRow({
@@ -427,17 +484,86 @@ function GroupRow({
   );
 }
 
+// --- Prehľad veku a stravy --------------------------------------------------
+
+function Overview({
+  guests,
+  highlight,
+  onChange,
+}: {
+  guests: Guest[];
+  highlight: Highlight;
+  onChange: (h: Highlight) => void;
+}) {
+  const row = (key: string, label: ReactNode, count: number, active: boolean, toggle: () => void) => (
+    <li key={key}>
+      <button
+        type="button"
+        aria-pressed={active}
+        onClick={toggle}
+        className={`flex w-full items-center gap-2 rounded-lg px-2 py-1 text-left text-sm transition-colors ${
+          active ? 'bg-ink text-ivory' : 'text-ink hover:bg-champagne/50'
+        }`}
+      >
+        <span className="flex flex-1 items-center gap-2">{label}</span>
+        <span className="tabular-nums">{count}</span>
+      </button>
+    </li>
+  );
+
+  const withDiet = guests.filter((g) => g.diet.length).length;
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h3 className="mb-1 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ink-soft">Vek</h3>
+        <ul>
+          {AGES.map((a) =>
+            row(a.id, a.label, guests.filter((g) => g.age === a.id).length, highlight.age === a.id, () =>
+              onChange({ ...highlight, age: highlight.age === a.id ? undefined : a.id }),
+            ),
+          )}
+        </ul>
+      </div>
+      <div>
+        <h3 className="mb-1 font-sans text-xs font-semibold uppercase tracking-[0.16em] text-ink-soft">Strava</h3>
+        <ul>
+          {row('any', 'Akékoľvek obmedzenie', withDiet, highlight.diet === 'any', () =>
+            onChange({ ...highlight, diet: highlight.diet === 'any' ? undefined : 'any' }),
+          )}
+          {DIETS.map((d) => {
+            const Icon = DIET_ICONS[d.id];
+            return row(
+              d.id,
+              <>
+                <Icon size={14} className="shrink-0" /> {d.label}
+              </>,
+              guests.filter((g) => g.diet.includes(d.id)).length,
+              highlight.diet === d.id,
+              () => onChange({ ...highlight, diet: highlight.diet === d.id ? undefined : d.id }),
+            );
+          })}
+        </ul>
+      </div>
+      <p className="text-xs text-ink-soft/80">Kliknutím zvýrazníte týchto hostí pri stoloch.</p>
+    </div>
+  );
+}
+
 // --- Pridávanie hostí -------------------------------------------------------
+
+const fieldLabel = 'text-xs font-semibold uppercase tracking-[0.16em] text-ink-soft';
 
 function AddGuestsForm({
   groups,
   onAdd,
 }: {
   groups: Group[];
-  onAdd: (names: string[], groupId: string | null) => void;
+  onAdd: (names: string[], groupId: string | null, age: Age) => void;
 }) {
   const [text, setText] = useState('');
   const [groupId, setGroupId] = useState<string>(groups[0]?.id ?? '');
+  const [age, setAge] = useState<Age>('adult');
   const validGroup = groups.some((g) => g.id === groupId) ? groupId : '';
 
   const submit = () => {
@@ -446,7 +572,7 @@ function AddGuestsForm({
       .map((n) => n.trim())
       .filter(Boolean);
     if (!names.length) return;
-    onAdd(names, validGroup || null);
+    onAdd(names, validGroup || null, age);
     setText('');
   };
 
@@ -459,7 +585,7 @@ function AddGuestsForm({
       }}
     >
       <label className="block">
-        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-soft">Mená</span>
+        <span className={fieldLabel}>Mená</span>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
@@ -478,9 +604,13 @@ function AddGuestsForm({
         </span>
       </label>
       <label className="block">
-        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-soft">Skupina</span>
+        <span className={fieldLabel}>Skupina</span>
         <GroupSelect groups={groups} value={validGroup} onChange={setGroupId} />
       </label>
+      <div>
+        <span className={fieldLabel}>Vek</span>
+        <AgePicker value={age} onChange={setAge} />
+      </div>
       <button
         type="submit"
         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-ink px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-ivory transition-colors hover:bg-sage-dark"
@@ -515,6 +645,28 @@ function GroupSelect({ groups, value, onChange }: { groups: Group[]; value: stri
   );
 }
 
+function AgePicker({ value, onChange }: { value: Age; onChange: (age: Age) => void }) {
+  return (
+    <div role="radiogroup" className="mt-1 grid grid-cols-3 gap-1 rounded-lg border border-line bg-white p-1">
+      {AGES.map((a) => (
+        <button
+          key={a.id}
+          type="button"
+          role="radio"
+          aria-checked={value === a.id}
+          title={a.label}
+          onClick={() => onChange(a.id)}
+          className={`rounded-md py-1.5 text-sm transition-colors ${
+            value === a.id ? 'bg-ink text-ivory' : 'text-ink hover:bg-champagne/50'
+          }`}
+        >
+          {a.short} r.
+        </button>
+      ))}
+    </div>
+  );
+}
+
 // --- Filter -----------------------------------------------------------------
 
 function Toolbar({
@@ -526,7 +678,12 @@ function Toolbar({
   highlight: Highlight;
   onChange: (h: Highlight) => void;
 }) {
-  const pill = (key: string, label: string, groupId: string | null | undefined, color?: string) => {
+  const pillClass = (active: boolean) =>
+    `inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors ${
+      active ? 'border-ink bg-ink text-ivory' : 'border-line bg-ivory text-ink hover:border-sage'
+    }`;
+
+  const pill = (key: string, label: string, groupId: string | null, color: string) => {
     const active = highlight.groupId === groupId;
     return (
       <button
@@ -534,15 +691,15 @@ function Toolbar({
         type="button"
         aria-pressed={active}
         onClick={() => onChange({ ...highlight, groupId: active ? undefined : groupId })}
-        className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition-colors ${
-          active ? 'border-ink bg-ink text-ivory' : 'border-line bg-ivory text-ink hover:border-sage'
-        }`}
+        className={pillClass(active)}
       >
-        {color && <span className="size-2.5 rounded-full" style={{ backgroundColor: color }} />}
+        <span className="size-2.5 rounded-full" style={{ backgroundColor: color }} />
         {label}
       </button>
     );
   };
+
+  const nothingActive = highlight.groupId === undefined && !highlight.age && !highlight.diet && !highlight.query.trim();
 
   return (
     <div className="flex flex-wrap items-center gap-3 print:hidden">
@@ -558,9 +715,26 @@ function Toolbar({
         />
       </label>
       <div className="flex flex-wrap gap-1.5">
-        {pill('all', 'Všetci', undefined)}
+        <button
+          type="button"
+          aria-pressed={nothingActive}
+          onClick={() => onChange(NO_HIGHLIGHT)}
+          className={pillClass(nothingActive)}
+        >
+          Všetci
+        </button>
         {groups.map((g) => pill(g.id, g.name, g.id, g.color))}
         {pill('none', 'Bez skupiny', null, NO_GROUP_COLOR)}
+        {highlight.age && (
+          <button type="button" onClick={() => onChange({ ...highlight, age: undefined })} className={pillClass(true)}>
+            {ageShort(highlight.age)} r. <X size={12} />
+          </button>
+        )}
+        {highlight.diet && (
+          <button type="button" onClick={() => onChange({ ...highlight, diet: undefined })} className={pillClass(true)}>
+            {highlight.diet === 'any' ? 'Obmedzenie stravy' : dietLabel(highlight.diet)} <X size={12} />
+          </button>
+        )}
       </div>
     </div>
   );
@@ -579,6 +753,12 @@ function GuestChip({
   dimmed: boolean;
   onEdit: () => void;
 }) {
+  const details = [
+    guest.age !== 'adult' && `${ageShort(guest.age)} r.`,
+    ...guest.diet.map(dietLabel),
+    guest.note,
+  ].filter(Boolean);
+
   return (
     <button
       type="button"
@@ -588,7 +768,7 @@ function GuestChip({
         e.dataTransfer.effectAllowed = 'move';
       }}
       onClick={onEdit}
-      title={guest.note ? `${guest.name} – ${guest.note}` : guest.name}
+      title={details.length ? `${guest.name} – ${details.join(', ')}` : guest.name}
       className={`inline-flex max-w-full cursor-grab items-center gap-1.5 rounded-full border px-2.5 py-1 text-left text-sm text-ink transition-opacity active:cursor-grabbing print:border-none print:p-0 ${
         dimmed ? 'opacity-25' : ''
       }`}
@@ -596,6 +776,7 @@ function GuestChip({
     >
       <span className="size-2.5 shrink-0 rounded-full" style={{ backgroundColor: color }} />
       <span className="truncate">{guest.name}</span>
+      <GuestBadges guest={guest} />
       {guest.note && <span className="text-ink-soft">*</span>}
     </button>
   );
@@ -640,6 +821,32 @@ function DropZone({
 
 // --- Stoly ------------------------------------------------------------------
 
+/** Súhrn pre kuchyňu: počet detí a obmedzení stravy pri stole. */
+function TableSummary({ guests }: { guests: Guest[] }) {
+  const parts: ReactNode[] = [];
+  for (const age of AGES) {
+    const count = guests.filter((g) => g.age === age.id).length;
+    if (age.id !== 'adult' && count)
+      parts.push(
+        <span key={age.id}>
+          {count}× {age.short} r.
+        </span>,
+      );
+  }
+  for (const diet of DIETS) {
+    const count = guests.filter((g) => g.diet.includes(diet.id)).length;
+    if (!count) continue;
+    const Icon = DIET_ICONS[diet.id];
+    parts.push(
+      <span key={diet.id} className="inline-flex items-center gap-1" title={diet.label}>
+        {count}× <Icon size={13} aria-label={diet.label} />
+      </span>,
+    );
+  }
+  if (!parts.length) return null;
+  return <div className="flex flex-wrap gap-x-3 gap-y-1 px-1.5 text-xs text-ink-soft">{parts}</div>;
+}
+
 function TableCard({
   table,
   guests,
@@ -679,6 +886,14 @@ function TableCard({
               aria-label="Názov stola"
               className="min-w-0 flex-1 rounded-md border border-transparent bg-transparent px-1.5 py-0.5 font-serif text-2xl text-ink hover:border-line focus:border-sage focus:bg-white focus:outline-none print:p-0"
             />
+            {table.shape === 'rect' && (
+              <IconButton
+                label="Otočiť v sále o 90°"
+                icon={<RotateCw size={15} />}
+                onClick={() => onChange({ rotation: (table.rotation + 90) % 180 })}
+                className="print:hidden"
+              />
+            )}
             <IconButton
               label={table.shape === 'round' ? 'Zmeniť na obdĺžnikový stôl' : 'Zmeniť na okrúhly stôl'}
               icon={table.shape === 'round' ? <RectangleHorizontal size={16} /> : <Circle size={16} />}
@@ -711,6 +926,8 @@ function TableCard({
               />
             </span>
           </div>
+
+          <TableSummary guests={guests} />
 
           <TableDiagram table={table} guests={guests} colorOf={colorOf} isDimmed={isDimmed} />
 
@@ -853,14 +1070,13 @@ function GuestDialog({
 
   const field =
     'mt-1 block w-full rounded-lg border border-line bg-white px-3 py-2 text-sm text-ink focus:border-sage focus:outline-none';
-  const label = 'text-xs font-semibold uppercase tracking-[0.16em] text-ink-soft';
 
   return (
     <dialog
       ref={ref}
       onClose={onClose}
       onClick={(e) => e.target === e.currentTarget && onClose()}
-      className="theme-sage m-auto w-[calc(100%-2rem)] max-w-md rounded-2xl border border-line p-0 shadow-soft backdrop:bg-ink/30 backdrop:backdrop-blur-sm"
+      className="theme-sage m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-md rounded-2xl border border-line p-0 shadow-soft backdrop:bg-ink/30 backdrop:backdrop-blur-sm"
     >
       {guest && (
         <form
@@ -876,19 +1092,50 @@ function GuestDialog({
             <IconButton label="Zavrieť" icon={<X size={18} />} onClick={onClose} />
           </div>
           <label className="block">
-            <span className={label}>Meno</span>
+            <span className={fieldLabel}>Meno</span>
             <input value={guest.name} onChange={(e) => onChange({ name: e.target.value })} className={field} />
           </label>
           <label className="block">
-            <span className={label}>Skupina</span>
+            <span className={fieldLabel}>Skupina</span>
             <GroupSelect
               groups={groups}
               value={guest.groupId ?? ''}
               onChange={(id) => onChange({ groupId: id || null })}
             />
           </label>
+          <div>
+            <span className={fieldLabel}>Vek</span>
+            <AgePicker value={guest.age} onChange={(age) => onChange({ age })} />
+          </div>
+          <fieldset>
+            <legend className={fieldLabel}>Strava</legend>
+            <div className="mt-1 flex flex-wrap gap-1.5">
+              {DIETS.map((d) => {
+                const Icon = DIET_ICONS[d.id];
+                const checked = guest.diet.includes(d.id);
+                return (
+                  <label
+                    key={d.id}
+                    className={`inline-flex cursor-pointer items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors has-focus-visible:outline-2 has-focus-visible:outline-gold-deep ${
+                      checked ? 'border-ink bg-ink text-ivory' : 'border-line bg-white text-ink hover:border-sage'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      className="sr-only"
+                      checked={checked}
+                      onChange={() =>
+                        onChange({ diet: checked ? guest.diet.filter((x) => x !== d.id) : [...guest.diet, d.id] })
+                      }
+                    />
+                    <Icon size={14} /> {d.label}
+                  </label>
+                );
+              })}
+            </div>
+          </fieldset>
           <label className="block">
-            <span className={label}>Stôl</span>
+            <span className={fieldLabel}>Stôl</span>
             <select
               value={guest.tableId ?? ''}
               onChange={(e) => onChange({ tableId: e.target.value || null })}
@@ -903,12 +1150,12 @@ function GuestDialog({
             </select>
           </label>
           <label className="block">
-            <span className={label}>Poznámka</span>
+            <span className={fieldLabel}>Poznámka</span>
             <textarea
               value={guest.note}
               onChange={(e) => onChange({ note: e.target.value })}
               rows={2}
-              placeholder="napr. vegetarián, detská stolička…"
+              placeholder="napr. alergia na jahody, detská stolička…"
               className={`${field} resize-y placeholder:text-ink-soft/50`}
             />
           </label>

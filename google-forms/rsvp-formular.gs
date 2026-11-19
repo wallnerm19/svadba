@@ -20,18 +20,18 @@
  */
 
 const NASTAVENIA = {
-  nazov: 'Potvrdenie účasti – Marek & Veronika',
+  nazov: 'Potvrdenie účasti – Veronika & Marek',
   popis:
     'Milí naši,\n' +
     'budeme nesmierne radi, ak 30. apríla 2027 oslávite náš veľký deň s nami v Bašte Pajštún v Borinke.\n\n' +
     'Prosíme, vyplňte tento krátky formulár najneskôr do 31. marca 2027 – každý hosť alebo pár iba raz. ' +
     'Ak sa vaše plány zmenia, dajte nám vedieť.\n\n' +
-    'Ďakujeme! Marek & Veronika',
+    'Ďakujeme! Veronika & Marek',
   potvrdenie:
     'Ďakujeme, vaša odpoveď bola uložená! 💚\n' +
     'Tešíme sa na vás 30. apríla 2027 v Bašte Pajštún.\n\n' +
-    'Marek & Veronika',
-  nazovTabulky: 'Potvrdenie účasti – Marek & Veronika (odpovede)',
+    'Veronika & Marek',
+  nazovTabulky: 'Potvrdenie účasti – Veronika & Marek (odpovede)',
   maxPocetOsob: 6,
 };
 

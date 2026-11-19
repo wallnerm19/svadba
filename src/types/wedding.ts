@@ -46,7 +46,7 @@ export interface ImageAsset {
 }
 
 export interface Venue {
-  /** Krátky nadpis karty, napr. „Obrad a hostina“. */
+  /** Úvodná veta karty, napr. „Obrad aj hostina sa budú konať na jednom mieste.“ */
   label: string;
   name: string;
   /** Časy programu vo formáte HH:MM (miestny čas svadby), napr. obrad a hostina. */
@@ -226,10 +226,6 @@ export interface WeddingConfig {
       text: string;
     };
     cards: InfoCard[];
-    dressCode: {
-      title: string;
-      description: string;
-    };
     faqTitle: string;
     faq: FaqItem[];
     contactsTitle: string;

@@ -22,8 +22,8 @@ function VenueCard({ venue }: { venue: Venue }) {
         />
       )}
       <div className="flex flex-col items-center justify-center px-7 py-12 text-center sm:px-12">
-        <p className="eyebrow">{venue.label}</p>
-        <h3 className="mt-4 text-3xl leading-tight text-ink sm:text-4xl">{venue.name}</h3>
+        <h3 className="text-3xl leading-tight text-ink sm:text-4xl">{venue.name}</h3>
+        <p className="mt-4 max-w-sm font-serif text-xl text-ink-soft italic">{venue.label}</p>
         <Ornament className="mt-6" />
         <dl className="mt-6 flex flex-wrap justify-center gap-x-10 gap-y-4">
           {venue.times.map((t) => (

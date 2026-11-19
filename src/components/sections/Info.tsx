@@ -51,12 +51,6 @@ export function Info() {
           ))}
         </ul>
 
-        {/* Dress code */}
-        <Reveal className="mt-24 border border-line bg-ivory px-7 py-14 text-center text-ink sm:mt-32 sm:px-14 sm:py-20">
-          <p className="eyebrow">Oblečenie</p>
-          <h3 className="mt-4 text-4xl sm:text-5xl">{info.dressCode.title}</h3>
-          <p className="mx-auto mt-6 max-w-2xl text-ink-soft sm:text-lg">{info.dressCode.description}</p>
-        </Reveal>
 
         {/* FAQ + kontakty */}
         <div className="mt-24 grid gap-16 sm:mt-32 lg:grid-cols-12 lg:gap-20">

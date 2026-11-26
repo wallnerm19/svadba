@@ -197,43 +197,8 @@ export const wedding: WeddingConfig = {
     eyebrow: 'Fotogaléria',
     title: 'Naše momenty',
     intro: 'Pár spomienok z našej spoločnej cesty.',
-    images: [
-      {
-        src: 'images/galeria/lanovka.webp',
-        alt: 'Veronika a Marek v lyžiarskych prilbách a okuliaroch na sedačkovej lanovke',
-        width: 563,
-        height: 751,
-        caption: 'Spolu aj na svahu',
-      },
-      {
-        src: 'images/galeria/hokej.webp',
-        alt: 'Veronika a Marek na hokejovom zápase, za nimi maskot orla',
-        width: 683,
-        height: 911,
-        caption: 'Na hokeji s maskotom',
-      },
-      {
-        src: 'images/galeria/chata.webp',
-        alt: 'Veronika v kostýme opičky a Marek v kostýme líšky pred drevenou chatou na horách',
-        width: 684,
-        height: 911,
-        caption: 'Líška a opička na chate',
-      },
-      {
-        src: 'images/galeria/za-plotom.webp',
-        alt: 'Veronika a Marek so smutnými grimasami za kovovým plotom',
-        width: 684,
-        height: 911,
-        caption: 'Keď nás nikam nepustili',
-      },
-      {
-        src: 'images/galeria/leto.webp',
-        alt: 'Veronika a Marek popíjajú pod stromami letný drink',
-        width: 683,
-        height: 911,
-        caption: 'Letné osvieženie',
-      },
-    ],
+    // Fotky galérie boli odstránené (sekcia je vypnutá). Nájdete ich v histórii gitu, commit 9898f36.
+    images: [],
   },
 
   info: {

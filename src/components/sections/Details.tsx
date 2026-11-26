@@ -13,13 +13,19 @@ import { SectionHeading } from '../ui/SectionHeading';
 /** Obrad aj hostina sú na jednom mieste, preto ich ukazujeme v jednom spoločnom bloku. */
 function VenueCard({ venue }: { venue: Venue }) {
   return (
-    <Reveal as="article" className="group grid overflow-hidden bg-ivory shadow-soft lg:grid-cols-2">
-      {venue.image && (
-        <Picture
-          image={venue.image}
-          className="aspect-[16/10] lg:aspect-auto lg:h-full"
-          imgClassName="transition-transform duration-[1.6s] ease-elegant group-hover:scale-[1.04]"
-        />
+    <Reveal as="article" className="grid overflow-hidden bg-ivory shadow-soft lg:grid-cols-2">
+      {venue.childhood && (
+        <figure className="flex flex-col items-center justify-center gap-8 bg-cream px-6 py-12 sm:px-12 sm:py-14">
+          <figcaption className="text-center font-serif text-3xl text-ink italic sm:text-4xl">
+            {venue.childhood.caption}
+          </figcaption>
+          <div className="w-full max-w-lg -rotate-1 bg-ivory p-2 pb-0 shadow-soft ring-1 ring-line/60 transition-transform duration-500 ease-out hover:rotate-0 sm:p-3 sm:pb-0">
+            <Picture image={venue.childhood.image} className="aspect-[8/5] w-full" />
+            <p className="py-2.5 text-center font-serif text-xl text-ink-soft italic sm:py-3.5 sm:text-2xl">
+              {venue.childhood.image.label}
+            </p>
+          </div>
+        </figure>
       )}
       <div className="flex flex-col items-center justify-center px-7 py-12 text-center sm:px-12">
         <h3 className="text-3xl leading-tight text-ink sm:text-4xl">{venue.name}</h3>

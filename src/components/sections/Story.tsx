@@ -25,21 +25,6 @@ export function Story() {
             <p className="mt-7 text-ink-soft sm:text-lg">{story.text}</p>
           </Reveal>
         </article>
-        {story.childhood && (
-          <figure className="mx-auto mt-20 max-w-2xl sm:mt-28">
-            <Reveal>
-              <figcaption className="mb-10 text-center font-serif text-3xl text-ink italic sm:mb-14 sm:text-5xl">
-                {story.childhood.caption}
-              </figcaption>
-            </Reveal>
-            <div className="-rotate-1 bg-ivory p-2 pb-0 shadow-soft ring-1 ring-line/60 transition-transform duration-500 ease-out hover:rotate-0 sm:p-3 sm:pb-0">
-              <Picture image={story.childhood.image} className="aspect-[8/5] w-full" />
-              <p className="py-2.5 text-center font-serif text-xl text-ink-soft italic sm:py-4 sm:text-2xl">
-                {story.childhood.image.label}
-              </p>
-            </div>
-          </figure>
-        )}
       </div>
     </section>
   );

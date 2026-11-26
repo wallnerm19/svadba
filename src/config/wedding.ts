@@ -92,16 +92,6 @@ export const wedding: WeddingConfig = {
       height: 911,
       focus: '50% 30%',
     },
-    childhood: {
-      caption: 'Tieto dve deti sa budú brať',
-      image: {
-        src: 'images/detstvo/spolu.webp',
-        label: 'Veronika & Marek',
-        alt: 'Detské fotky vedľa seba: vľavo sa smeje malá Veronika, vpravo sedí malý Marek s kockami stavebnice',
-        width: 1600,
-        height: 1000,
-      },
-    },
   },
 
   details: {
@@ -116,11 +106,15 @@ export const wedding: WeddingConfig = {
       address: '900 32 Borinka · GPS 48.27419, 17.070555',
       mapsUrl: 'https://www.google.com/maps/dir/?api=1&destination=48.27419,17.070555',
       description: 'Hneď po obrade nasleduje slávnostná večera a program.',
-      image: {
-        src: 'images/ceremony.svg',
-        alt: 'Bašta Pajštún – miesto obradu aj hostiny',
-        width: 1400,
-        height: 1000,
+      childhood: {
+        caption: 'Tieto dve deti sa budú brať',
+        image: {
+          src: 'images/detstvo/spolu.webp',
+          label: 'Veronika & Marek',
+          alt: 'Detské fotky vedľa seba: vľavo sa smeje malá Veronika, vpravo sedí malý Marek s kockami stavebnice',
+          width: 1600,
+          height: 1000,
+        },
       },
     },
     calendar: {

@@ -55,7 +55,12 @@ export interface Venue {
   description?: string;
   /** Vlastný odkaz na Google Maps. Ak chýba, vytvorí sa automaticky z adresy. */
   mapsUrl?: string;
-  image?: ImageAsset;
+  /** Detské fotky snúbencov s popisom – ľavá polovica karty miesta konania. */
+  childhood?: {
+    caption: string;
+    /** Jedna spojená fotka; label = text v spodnom okraji „výtlačku“. */
+    image: ImageAsset & { label: string };
+  };
 }
 
 export interface ScheduleItem {
@@ -174,12 +179,6 @@ export interface WeddingConfig {
     title: string;
     text: string;
     image: ImageAsset;
-    /** Detské fotky snúbencov s popisom. */
-    childhood?: {
-      caption: string;
-      /** Jedna spojená fotka; label = text v spodnom okraji „výtlačku“. */
-      image: ImageAsset & { label: string };
-    };
   };
 
   details: SectionHeading & {

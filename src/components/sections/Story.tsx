@@ -27,6 +27,11 @@ export function Story() {
         </article>
         {story.childhood && (
           <figure className="mx-auto mt-20 max-w-2xl sm:mt-28">
+            <Reveal>
+              <figcaption className="mb-10 text-center font-serif text-3xl text-ink italic sm:mb-14 sm:text-5xl">
+                {story.childhood.caption}
+              </figcaption>
+            </Reveal>
             <div className="grid grid-cols-2 items-start gap-3 sm:gap-10">
               {story.childhood.images.map((image, i) => (
                 <div
@@ -42,11 +47,6 @@ export function Story() {
                 </div>
               ))}
             </div>
-            <Reveal>
-              <figcaption className="mt-10 text-center font-serif text-3xl text-ink italic sm:mt-14 sm:text-5xl">
-                {story.childhood.caption}
-              </figcaption>
-            </Reveal>
           </figure>
         )}
       </div>

@@ -97,7 +97,7 @@ export const wedding: WeddingConfig = {
       image: {
         src: 'images/detstvo/spolu.webp',
         label: 'Veronika & Marek',
-        alt: 'Čiernobiele detské fotky vedľa seba: vľavo sa smeje malá Veronika, vpravo sedí malý Marek s kockami stavebnice',
+        alt: 'Detské fotky vedľa seba: vľavo sa smeje malá Veronika, vpravo sedí malý Marek s kockami stavebnice',
         width: 1600,
         height: 1000,
       },

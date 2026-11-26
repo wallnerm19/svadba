@@ -25,6 +25,30 @@ export function Story() {
             <p className="mt-7 text-ink-soft sm:text-lg">{story.text}</p>
           </Reveal>
         </article>
+        {story.childhood && (
+          <figure className="mx-auto mt-20 max-w-2xl sm:mt-28">
+            <div className="grid grid-cols-2 items-start gap-3 sm:gap-10">
+              {story.childhood.images.map((image, i) => (
+                <div
+                  key={image.src}
+                  className={`bg-ivory p-2 pb-0 shadow-soft ring-1 ring-line/60 transition-transform duration-500 ease-out hover:rotate-0 sm:p-3 sm:pb-0 ${
+                    i % 2 === 0 ? '-rotate-3' : 'mt-6 rotate-2 sm:mt-10'
+                  }`}
+                >
+                  <Picture image={image} className="aspect-[4/5] w-full" imgClassName="sepia-[.15]" />
+                  <p className="py-2.5 text-center font-serif text-xl text-ink-soft italic sm:py-4 sm:text-2xl">
+                    {image.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <Reveal>
+              <figcaption className="mt-10 text-center font-serif text-3xl text-ink italic sm:mt-14 sm:text-5xl">
+                {story.childhood.caption}
+              </figcaption>
+            </Reveal>
+          </figure>
+        )}
       </div>
     </section>
   );

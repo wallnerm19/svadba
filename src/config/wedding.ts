@@ -92,6 +92,27 @@ export const wedding: WeddingConfig = {
       height: 911,
       focus: '50% 30%',
     },
+    childhood: {
+      caption: 'Tieto decká sa berú',
+      images: [
+        {
+          src: 'images/detstvo/veronika.webp',
+          label: 'Veronika',
+          alt: 'Malá Veronika sa smeje, sedí v ružovo-modrom overale',
+          width: 700,
+          height: 995,
+          focus: '50% 35%',
+        },
+        {
+          src: 'images/detstvo/marek.webp',
+          label: 'Marek',
+          alt: 'Malý Marek sedí na koberci a v rukách drží kocky stavebnice',
+          width: 677,
+          height: 1000,
+          focus: '50% 0%',
+        },
+      ],
+    },
   },
 
   details: {

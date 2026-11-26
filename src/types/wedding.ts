@@ -174,6 +174,12 @@ export interface WeddingConfig {
     title: string;
     text: string;
     image: ImageAsset;
+    /** Detské fotky snúbencov s popisom. */
+    childhood?: {
+      caption: string;
+      /** label = meno pod fotkou v okraji „výtlačku“. */
+      images: (ImageAsset & { label: string })[];
+    };
   };
 
   details: SectionHeading & {

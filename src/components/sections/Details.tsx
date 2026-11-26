@@ -19,7 +19,7 @@ function VenueCard({ venue }: { venue: Venue }) {
           <figcaption className="text-center font-serif text-3xl text-ink italic sm:text-4xl">
             {venue.childhood.caption}
           </figcaption>
-          <div className="w-full max-w-lg -rotate-1 bg-ivory p-2 pb-0 shadow-soft ring-1 ring-line/60 transition-transform duration-500 ease-out hover:rotate-0 sm:p-3 sm:pb-0">
+          <div className="w-full max-w-lg bg-ivory p-2 pb-0 shadow-soft ring-1 ring-line/60 sm:p-3 sm:pb-0">
             <Picture image={venue.childhood.image} className="aspect-[8/5] w-full" />
             <p className="py-2.5 text-center font-serif text-xl text-ink-soft italic sm:py-3.5 sm:text-2xl">
               {venue.childhood.image.label}

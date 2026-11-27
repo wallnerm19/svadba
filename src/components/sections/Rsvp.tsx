@@ -42,7 +42,6 @@ export function Rsvp() {
             Prosíme o potvrdenie do <strong className="font-semibold text-ivory">{deadline}</strong>
           </p>
 
-
           <div className="mt-12 flex flex-col items-center gap-4">
             <ButtonLink
               href={rsvp.formUrl}

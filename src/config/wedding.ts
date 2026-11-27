@@ -165,12 +165,6 @@ export const wedding: WeddingConfig = {
     // Google formulár na potvrdenie účasti (odpovede sa ukladajú do Google Tabuľky).
     formUrl: 'https://docs.google.com/forms/d/e/1FAIpQLScVc9ZBYkGXMXj3pX1dQ09oZ2BY42nKmm2yQ62akptzHJ2oCw/viewform',
     deadline: '2027-03-31',
-    instructions: [
-      'Vyplňte krátky formulár – zaberie to menej ako dve minúty.',
-      'Každý hosť alebo pár vyplní formulár iba raz.',
-      'Uveďte, prosím, aj stravovacie obmedzenia či alergie.',
-      'Ak sa vaše plány zmenia, napíšte nám alebo zavolajte.',
-    ],
     buttonLabel: 'Potvrdiť účasť',
     embed: false,
     note: 'Formulár sa otvorí v novom okne (Google Forms).',
@@ -188,16 +182,7 @@ export const wedding: WeddingConfig = {
     eyebrow: 'Užitočné informácie',
     title: 'Všetko, čo potrebujete vedieť',
     intro: 'Praktické rady, aby ste si náš deň mohli užiť naplno a bez starostí.',
-    accommodation: {
-      title: 'Ubytovanie',
-      text: 'Ubytovať sa bude možné priamo na mieste, nemusíte sa tak po oslave už nikam presúvať. Prosíme všetkých hostí, ktorí majú záujem o ubytovanie priamo v mieste konania oslavy, aby to uviedli pri vypĺňaní dotazníka.',
-    },
     cards: [
-      {
-        icon: 'parking',
-        title: 'Parkovanie',
-        paragraphs: ['Parkovať sa dá priamo na mieste konania svadby. Nemusíte mať preto obavy prísť autom.'],
-      },
       {
         icon: 'bus',
         title: 'Doprava',
@@ -206,6 +191,11 @@ export const wedding: WeddingConfig = {
           'Možnosťou je aj autobus SAD na zastávku Borinka a odtiaľ taxík do Bašty Pajštún.',
           'Ak potrebujete s dopravou poradiť, neváhajte sa na nás obrátiť.',
         ],
+      },
+      {
+        icon: 'parking',
+        title: 'Parkovanie',
+        paragraphs: ['Parkovať sa dá priamo na mieste konania svadby. Nemusíte mať preto obavy prísť autom.'],
       },
       {
         icon: 'shirt',
@@ -224,9 +214,21 @@ export const wedding: WeddingConfig = {
           'Ak by ste nás predsa len chceli niečím potešiť, domácnosť máme už zariadenú. Namiesto vecných darov nás poteší finančný príspevok, ktorý využijeme na spoločné zážitky.',
         ],
       },
+      {
+        icon: 'home',
+        title: 'Ubytovanie',
+        paragraphs: [
+          'Pre hostí, ktorí by radi zostali aj cez noc, je k dispozícii možnosť plateného ubytovania priamo na mieste konania svadobnej hostiny. Ak máte o ubytovanie záujem, dajte nám vedieť prostredníctvom svadobného dotazníka.',
+        ],
+      },
     ],
     faqTitle: 'Časté otázky',
     faq: [
+      {
+        question: 'Ako máme potvrdiť svoju účasť na svadbe?',
+        answer:
+          'Svoju účasť, prosím, potvrďte vyplnením svadobného dotazníka. Dotazník je potrebné vyplniť za každého hosťa samostatne. Výnimkou sú deti do 12 rokov, ktoré môže jeden z rodičov uviesť vo svojom dotazníku. Za staršie deti je potrebné vyplniť samostatný dotazník.',
+      },
       {
         question: 'Do kedy mám potvrdiť účasť?',
         answer: 'Najneskôr do 31. marca 2027. Pomôže nám to s finálnym počtom hostí a menu.',
@@ -239,10 +241,6 @@ export const wedding: WeddingConfig = {
       {
         question: 'Čo ak mám alergiu alebo špeciálnu diétu?',
         answer: 'Napíšte nám to do formulára. Kuchyňa pripraví vegetariánske, bezlepkové aj iné alternatívy.',
-      },
-      {
-        question: 'Bude na mieste možnosť prespať?',
-        answer: 'Áno – ubytovanie bude len na mieste, priamo v priestoroch Bašty Pajštún.',
       },
     ],
     contactsTitle: 'Kontakty',

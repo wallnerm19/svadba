@@ -214,7 +214,6 @@ export interface WeddingConfig {
     formUrl: string;
     /** Termín potvrdenia účasti vo formáte RRRR-MM-DD. */
     deadline: string;
-    instructions: string[];
     buttonLabel: string;
     /** Zobraziť formulár aj priamo vložený v stránke (iframe) pod tlačidlom. */
     embed: boolean;
@@ -226,10 +225,6 @@ export interface WeddingConfig {
   };
 
   info: SectionHeading & {
-    accommodation: {
-      title: string;
-      text: string;
-    };
     cards: InfoCard[];
     faqTitle: string;
     faq: FaqItem[];

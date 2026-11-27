@@ -42,14 +42,6 @@ export function Rsvp() {
             Prosíme o potvrdenie do <strong className="font-semibold text-ivory">{deadline}</strong>
           </p>
 
-          <ol className="mx-auto mt-10 max-w-md space-y-3 text-left text-sm text-ivory/85 sm:text-base">
-            {rsvp.instructions.map((step, i) => (
-              <li key={step} className="flex gap-4">
-                <span className="font-serif text-xl leading-6 text-champagne">{i + 1}.</span>
-                <span>{step}</span>
-              </li>
-            ))}
-          </ol>
 
           <div className="mt-12 flex flex-col items-center gap-4">
             <ButtonLink

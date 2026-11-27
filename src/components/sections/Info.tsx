@@ -23,34 +23,28 @@ export function Info() {
       <div className="container-page">
         <SectionHeading id="informacie-title" eyebrow={info.eyebrow} title={info.title} intro={info.intro} />
 
-        {/* Ubytovanie */}
-        <Reveal className="flex flex-col items-center gap-6 border border-line bg-ivory px-7 py-12 text-center sm:flex-row sm:px-12 sm:text-left">
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-sage-light text-sage-dark">
-            <Icon name="home" size={24} />
-          </span>
-          <div>
-            <h3 className="text-3xl text-ink sm:text-4xl">{info.accommodation.title}</h3>
-            <p className="mt-3 text-ink-soft sm:text-lg">{info.accommodation.text}</p>
-          </div>
-        </Reveal>
-
-        {/* Praktické karty */}
-        <ul className="mt-16 grid gap-px overflow-hidden border border-line bg-line sm:mt-20 sm:grid-cols-2">
-          {info.cards.map((card, i) => (
-            <Reveal as="li" key={card.title} delay={(i % 2) * 0.08} className="bg-ivory p-8 sm:p-12">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-sage-light text-sage-dark">
-                <Icon name={card.icon} size={22} />
+        {/* Praktické informácie – obdĺžnikové karty pod sebou */}
+        <ul className="space-y-6 sm:space-y-8">
+          {info.cards.map((card) => (
+            <Reveal
+              as="li"
+              key={card.title}
+              className="flex flex-col items-center gap-6 border border-line bg-ivory px-7 py-12 text-center sm:flex-row sm:items-start sm:px-12 sm:text-left"
+            >
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-sage-light text-sage-dark">
+                <Icon name={card.icon} size={24} />
               </span>
-              <h3 className="mt-6 text-3xl text-ink">{card.title}</h3>
-              <div className="mt-4 space-y-3 text-ink-soft">
-                {card.paragraphs.map((p) => (
-                  <p key={p}>{p}</p>
-                ))}
+              <div>
+                <h3 className="text-3xl text-ink sm:text-4xl">{card.title}</h3>
+                <div className="mt-3 space-y-3 text-ink-soft sm:text-lg">
+                  {card.paragraphs.map((p) => (
+                    <p key={p}>{p}</p>
+                  ))}
+                </div>
               </div>
             </Reveal>
           ))}
         </ul>
-
 
         {/* FAQ + kontakty */}
         <div className="mt-24 grid gap-16 sm:mt-32 lg:grid-cols-12 lg:gap-20">
